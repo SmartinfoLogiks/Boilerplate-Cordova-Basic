@@ -62,7 +62,8 @@ function loadMenus() {
                     vx+=_ling(v.title);
                 }
                 if(v.icon!=null) vx+=v.icon;
-                $("#menuLoader").append("<a href='"+k+"'>"+vx+"</a>");
+                if(v.clas!=null) $("#menuLoader").append("<a class='"+v.clas+"' href='"+k+"'>"+vx+"</a>");
+                else $("#menuLoader").append("<a href='"+k+"'>"+vx+"</a>");
             } else {
                 if(v=="---") {
                     $("#menuLoader").append("<div class='subgroup'>"+k+"</div>");
@@ -125,7 +126,7 @@ function getLingSelector() {
     html+="<div class='modal-header'><h4 class='modal-title'>Select Prefered Language</h4></div>";
     html+="<div class='modal-body'>";
     html+="<select class='form-control' name='language' id='language'>";
-    $.each(lingLang,function(k,v) {
+    $.each(appConfig.lang,function(k,v) {
             if(v==appLang) html+="<option value='"+k+"' selected>"+v+"</option>";
             else html+="<option value='"+k+"'>"+v+"</option>";
         });

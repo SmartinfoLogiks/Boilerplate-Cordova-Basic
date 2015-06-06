@@ -1,7 +1,4 @@
 var appLang="en-GB";
-var lingLang={
-		"en-GB":"English"
-	};
 var lingData={};
 
 //Prototypes
@@ -68,9 +65,11 @@ String.prototype.trim = function() {
 }
 
 function _ling(str) {
-	//if(appConfig.DEBUG) console.log(str+" "+lingData[appLang][str]);
+	//if(appConfig.DEBUG) console.warn(str+"=>"+lingData[str]);//+" "+lingData[appLang][str]
 	if(lingData[str]!=null) {
-		if(lingData[str][appLang]!=null) {
+		if((typeof lingData[str])=="string") {
+			return lingData[str];
+		} else if(lingData[str][appLang]!=null) {
 			return lingData[str][appLang];
 		}
 	} else if(lingData[appLang]!=null) {
@@ -81,7 +80,7 @@ function _ling(str) {
 	return str.replace(/_/g," ");
 }
 function htmlContentReplacer(match, p1, p2, p3, offset, string) {
-	if(appConfig.DEBUG) console.warn(match);
+	//if(appConfig.DEBUG) console.warn(match);
 	match=match.substr(1,match.length-2);
 	// p1 is nondigits, p2 digits, and p3 non-alphanumerics
 	return _ling(match);

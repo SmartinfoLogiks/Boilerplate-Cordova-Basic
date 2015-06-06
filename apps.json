@@ -4,9 +4,9 @@
     "APPKEY": "",
     "REMOTEKEY": "erty",
     "PAGEHOME": "#home",
-    "PAGEERROR": "#home",
+    "PAGEERROR": "#error",
     "URL": {
-        "DATASRC":""
+        "DATASRC":"http://www.demo.openlogiks.org/services/"
     },
     "FEEDBACK":"admin@openlogiks.org",
     "SUPPORT":"admin@openlogiks.org",
@@ -24,23 +24,45 @@
         "PRIVACY":"",
         "ABOUT":""
     },
+    "lang":{
+        "en-GB":"English",
+        "fr-FR":"French",
+        "de-DE":"German",
+        "pt-BR":"Portuggese",
+        "es-ES":"Spanish"
+    },
     "MENU": {
-        "#search": {
-            "title":"Search",
-            "icon":"<span class='glyphicon glyphicon-search right'></span>"
+        "#home": {
+            "title":"Home",
+            "icon":"<span class='glyphicon glyphicon-home pull-right'></span>"
         },
-        "#home": "Home",
-        "#notfications": "Notfications",
-        "#settings": "Settings",
-        "http://www.logiks.com/home/about/faqs?utmSource=mobileApp":"FAQs",
-        "#about": "About App",
+        "#notfications": {
+            "title":"Notfications",
+            "rule":"afterlogin",
+            "icon":"<span class='glyphicon glyphicon-bullhorn pull-right'></span>"
+        },
+        "#settings": {
+            "title":"Settings",
+            "icon":"<span class='glyphicon glyphicon-wrench pull-right'></span>"
+        },
         "#logout": {
             "title":"Logout",
-            "rule":"afterlogin"
+            "rule":"afterlogin",
+            "icon":"<span class='glyphicon glyphicon-log-out pull-right'></span>"
         },
         "#login": {
             "title":"Login",
-            "rule":"beforelogin"
+            "rule":"beforelogin",
+            "icon":"<span class='glyphicon glyphicon-log-in pull-right'></span>"
+        },
+        "http://demo.openlogiks.org/home/about/faqs?utmSource=mobileApp":{
+            "title":"FAQs",
+            "clas":"border-top",
+            "icon":"<span class='glyphicon glyphicon-globe pull-right'></span>"
+        },
+        "#about": {
+            "title":"About Us",
+            "icon":"<span class='glyphicon glyphicon-info-sign pull-right'></span>"
         }
     }
 }

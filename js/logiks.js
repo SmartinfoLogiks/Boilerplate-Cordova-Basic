@@ -15,7 +15,7 @@ document.addEventListener("deviceready", function() {
 
 //Other Functions
 function showAlert(message, title, callBack) {
-	if(title==null) title="PlacPic";
+	if(title==null) title=appConfig.APPNAME;
 
 	if (navigator.notification) {
 		navigator.notification.alert(message, callBack, title, 'OK');
@@ -24,7 +24,7 @@ function showAlert(message, title, callBack) {
 	}
 }
 function showPrompt(message,defaultData,callBack,title) {
-	if(title==null) title="PlacPic";
+	if(title==null) title=appConfig.APPNAME;
 	if (navigator.notification) {
 		navigator.notification.prompt(message,function(txt) {
 				if(txt.buttonIndex==1) callBack(txt.input1);
@@ -34,7 +34,7 @@ function showPrompt(message,defaultData,callBack,title) {
 	}
 }
 function showConfirm(message,callBack,title) {
-	if(title==null) title="PlacPic";
+	if(title==null) title=appConfig.APPNAME;
 	if (navigator.notification) {
 		navigator.notification.confirm(message,callBack,title);
 	} else {
@@ -93,7 +93,7 @@ function getServiceCMD(cmd,action,format) {
 	if(duuid==null) duuid="";
 	else duuid=encodeURIComponent(duuid);
 	
-	lx="http://www.placpic.com/services/"+cmd+"?site=home&APIKEY="+appConfig.REMOTEKEY+
+	lx=appConfig.URL.DATASRC+cmd+"?site=home&APIKEY="+appConfig.REMOTEKEY+
 		"&token="+token+"&deviceuuid="+duuid;
 	if(action!=null && action.length>0) lx+="&action="+action;
 	if(format!=null && format.length>0) lx+="&format="+format;

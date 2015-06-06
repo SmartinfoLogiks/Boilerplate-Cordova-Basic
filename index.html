@@ -3,6 +3,8 @@
     <meta charset="utf-8" />
     <title>Dummy APP v1.0</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="icon.png">
+
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
@@ -50,9 +52,10 @@ requirejs([
 		'libs/quo.standalone',
         'commons',
 		'logiks',
-		'logiks.ux'
+		'logiks.ux',
+        'logiks.app'
 	],function(util) {
-    	require(['app/app']);
+        require(['app/app']);
 	});
 </script>
 <script src="phonegap.js"></script>
