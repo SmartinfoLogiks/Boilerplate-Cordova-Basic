@@ -1,0 +1,46 @@
+{
+    "DEBUG": true,
+    "APPNAME": "Dummy App",
+    "APPKEY": "",
+    "REMOTEKEY": "erty",
+    "PAGEHOME": "#home",
+    "PAGEERROR": "#home",
+    "URL": {
+        "DATASRC":""
+    },
+    "FEEDBACK":"admin@openlogiks.org",
+    "SUPPORT":"admin@openlogiks.org",
+    "DEFAULTS":{
+        "NOTIFICATION_INTERVAL":60000
+    },
+    "MARKETS":{
+        "ANDROID":"",
+        "IOS":"",
+        "WINDOWS":"",
+        "BLACKBERRY":""
+    },
+    "LINKS":{
+        "TERMS":"",
+        "PRIVACY":"",
+        "ABOUT":""
+    },
+    "MENU": {
+        "#search": {
+            "title":"Search",
+            "icon":"<span class='glyphicon glyphicon-search right'></span>"
+        },
+        "#home": "Home",
+        "#notfications": "Notfications",
+        "#settings": "Settings",
+        "http://www.logiks.com/home/about/faqs?utmSource=mobileApp":"FAQs",
+        "#about": "About App",
+        "#logout": {
+            "title":"Logout",
+            "rule":"afterlogin"
+        },
+        "#login": {
+            "title":"Login",
+            "rule":"beforelogin"
+        }
+    }
+}

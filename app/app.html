@@ -1,0 +1,69 @@
+<div class='header container'>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-for='cbp-spmenu-s1'>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+			<!-- <button type="button" class="navbar-toggle" data-for='cbp-spmenu-s2' style="padding: 5px;font-size: 1.2em;">
+				<span class="glyphicon glyphicon-tags"></span>
+			</button> -->
+			<a class="navbar-brand"></a>
+		</div>
+	</div>
+</div>
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1" style="overflow:auto;">
+	<div class='mimicHeaderBar'>
+		<div class='buttonSpace'>
+			<button type="button" class="navbar-toggle menu-close">
+			  <span class="glyphicon glyphicon-chevron-right" style="font-size: 1.3em;margin-top: -5px;margin-right: 3px;"></span>
+			</button>
+		</div>
+	</div>
+	<div id='userProfile' class='userProfileInBar'>
+		<div class="thumbnail">
+			<a href='#profile' style="padding: 0px;border: 0px;"><img src=""></a>
+		</div>
+		<div class="infoData">
+			<div class='title'></div>
+			<div class='small'></div>
+		</div>
+	</div>
+	<div id='menuLoader' class='menuContainer ajaxloading' style="min-height: 120%;padding-left: 4px;">
+		<br/><br/>Loading Menus
+	</div>
+</nav>
+
+<div id='mainContainer' class="home-view container"></div>
+
+<!--
+<div id="footer">
+	<div class="container">
+		<ul class='footMenu'>
+			<li id='uploadbtn' class='actionIcon' cmd='upload'><span class='glyphicon glyphicon-picture'></span>&nbsp;&nbsp;Upload</li>
+			<li id='explorebtn' class='actionIcon' cmd='explore'><span class='glyphicon glyphicon-road'></span>&nbsp;&nbsp;Explore</li>
+		</ul>
+	</div>
+</div>
+-->
+<script>
+$(function() {
+	$(".navbar-header .navbar-toggle").on("touch",function(e) {
+		refNav=$(this).data("for");
+		$("#"+refNav).toggleClass("cbp-spmenu-open");
+	});
+	$(".cbp-spmenu .navbar-toggle").on("touch",function(e) {
+		refNav=$(this).closest(".cbp-spmenu").attr("id");
+		$("#"+refNav).toggleClass("cbp-spmenu-open");
+	});
+    $(".cbp-spmenu").delegate("a","touch",function(e) {
+        href=$(this).attr("href");
+        if(href.charAt(0)=="#") {
+            app.route(href);
+        } else {
+            navigator.app.loadUrl(href, { openExternal:true });
+        }
+    });
+});
+</script>
