@@ -1,2 +1,5 @@
-app
-app/pages/home.html
+platforms/
+plugins/
+dist/
+.thumbs
+.DS_Store

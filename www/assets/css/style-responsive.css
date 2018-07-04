@@ -1,0 +1,23 @@
+@media (max-width: 480px) {
+	.tab {
+		float: none;
+		display: static;
+		width: 100%;
+		text-align: center;
+		border: 1px solid #e3e3e3;
+		margin: 2px 0;
+	}
+	.tab.active {
+		background: #f6f6f6;
+		top: 0px;
+	}
+}
+
+@media (min-width: 767px) {
+	.navbar-header {
+		float: none;
+	}
+	.navbar-toggle {
+		display: block;
+	}
+}

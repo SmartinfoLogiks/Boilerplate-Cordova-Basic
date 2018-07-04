@@ -1,0 +1,112 @@
+{
+	"APPTITLE": "New App",
+	"DEBUG": true,
+	"STATUS": "DEBUG",
+	"CHECKONLINE": true,
+	"PAGEHOME": "#home",
+	"PAGEERROR": "#error",
+	"APPKEY": "appkey",
+	"REMOTEKEY": "ASDASDAD",
+	"REFSITE": "home",
+	"URL": "http://smartinfologiks.net/services/",
+	"FEEDBACK": "smartinfologiks@gmail.com",
+	"SUPPORT": "smartinfologiks@gmail.com",
+	"DEFAULTS": {
+		"PING_INTERVAL": 300111,
+		"PROCESS_INTERVAL": 60000,
+		"NOTIFICATION_INTERVAL": 600211,
+		"CACHE_DATA_PERIOD": 300,
+		"CACHE_ASSETS_PERIOD": 604800,
+		"GREEDY_CACHE": false,
+		"CURRENCY": "$"
+	},
+	"KEYS": {
+		"GOOGLE_ANALYTICS": ""
+	},
+	"lang": {
+		"en-GB": "English"
+	},
+	"MARKETS": {
+		"ANDROID": "com.smartinfologiks.app",
+		"IOS": "",
+		"WINDOWS": "",
+		"BLACKBERRY": ""
+	},
+	"LINKS": {
+		"TERMS": "http://www.smartinfologiks.com/about/terms",
+		"PRIVACY": "http://www.smartinfologiks.com/about/privacy",
+		"ABOUT": "http://www.smartinfologiks.com/about"
+	},
+	"PAGECONFIG": {
+		"NOHEADER": [
+			"login",
+			"register",
+			"forgotpwd"
+		],
+		"NOFOOTER": [
+			"login",
+			"register",
+			"forgotpwd"
+		],
+		"NOBACKBTN": [
+			"welcome",
+			"home",
+			"dashboard",
+			"login",
+			"register",
+			"forgotpwd"
+		]
+	},
+	"MENU": {
+		"#search": {
+			"title": "Search",
+			"icon": "<i class='fa fa-search galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#home": {
+			"title": "Home",
+			"icon": "<i class='fa fa-home galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#app_cat_view": {
+			"title": "Categories",
+			"icon": "<i class='fa fa-th-large galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#continents": {
+			"title": "Places",
+			"icon": "<i class='fa fa-map-marker galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#notification": {
+			"title": "Notification",
+			"icon": "<i class='fa fa-comments galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#profile_settings": {
+			"title": "Settings",
+			"icon": "<i class='fa fa-cog galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#logout": {
+			"title": "Logout",
+			"icon": "<i class='fa fa-lock pull-left pull-left' aria-hidden='true'></i>",
+			"rule": ""
+		},
+		"#log_in": {
+			"title": "Login",
+			"icon": "<i class='fa fa-sign-in pull-left' aria-hidden='true'></i>",
+			"rule": "beforelogin"
+		},
+		"#register": {
+			"title": "Register",
+			"icon": "<i class='fa fa-sign-in pull-left' aria-hidden='true'></i>",
+			"rule": "beforelogin"
+		},
+		"#about": {
+			"title": "About",
+			"icon": "<i class='fa fa-home galery-icon8 pull-left' aria-hidden='true'></i>",
+			"rule": "beforelogin"
+		}
+	}
+}

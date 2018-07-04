@@ -1,0 +1,76 @@
+<script id="albumTemplate" type="text/x-handlebars-template">
+  {{#each albums}}
+  <div class="album-listing-sub-4 albumBox" data-refid='{{id}}' data-authorid='{{authorid}}' data-status='{{status}}'>
+    <div class="col-xs-12 text-center album-listing-adj3">
+      <figure class="image-list-mob-con2 ajaxloadingPhoto">
+        <img src="{{photo cover_photo}}" width="100%">
+        <div class="overlay"></div>
+      </figure>
+      <div class="album-des-con-3">
+          <p class="album-des-name1">{{name}}</p>
+          <p class="album-des-date1">{{dated last_updated}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</script>
+<script id="einviteTemplate" type="text/x-handlebars-template">
+  {{#each albums}}
+  <div class="album-listing-sub-4 albumBox" data-refid='{{id}}' data-authorid='{{authorid}}' data-status='{{status}}'>
+    <div class="col-xs-12 text-center album-listing-adj3">
+      <figure class="image-list-mob-con2 ajaxloadingPhoto">
+        <img src="{{photo cover_photo}}" width="100%">
+        <div class="overlay"></div>
+      </figure>
+      <div class="album-des-con-3">
+          <p class="album-des-name1">{{name}}</p>
+          <p class="album-des-date1">{{dated last_updated}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</script>
+<script id="qalbumTemplate" type="text/x-handlebars-template">
+  {{#each albums}}
+  <div class="album-listing-sub-4 albumBox" data-refid='{{id}}' data-authorid='{{authorid}}' data-status='{{status}}'>
+    <div class="col-xs-12 text-center album-listing-adj3">
+      <figure class="image-list-mob-con2 ajaxloadingPhoto">
+        <img src="{{photo cover_photo}}" width="100%">
+        <div class="overlay"></div>
+      </figure>
+      <div class="album-des-con-3">
+          <p class="album-des-name1">{{name}}</p>
+          <p class="album-des-date1">{{dated last_updated}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</script>
+<script id="dailyUpdatesTemplate" type="text/x-handlebars-template">
+  {{#each albums}}
+  <div class="album-listing-sub-4 albumBox" data-refid='{{id}}' data-authorid='{{authorid}}' data-status='{{status}}'>
+    <div class="col-xs-12 text-center album-listing-adj3">
+      <figure class="image-list-mob-con2 ajaxloadingPhoto">
+        <img src="{{photo cover_photo}}" width="100%">
+        <div class="overlay"></div>
+      </figure>
+      <div class="album-des-con-3">
+          <p class="album-des-name1">{{name}}</p>
+          <p class="album-des-date1">{{dated last_updated}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</script>
+<script id="sheetTemplate" type="text/x-handlebars-template">
+  {{#each photos}}
+  <div class="album-listing-sub-4 sheetBox" data-refid='{{id}}' data-albumid='{{albumid}}'>
+    <div class="col-xs-12 text-center album-listing-adj3">
+      <figure class="image-list-mob-con2 ajaxloadingPhoto">
+        <img src="{{photo photos_thumb}}" width="100%">
+        <div class="overlay"></div>
+      </figure>
+    </div>
+  </div>
+  {{/each}}
+</script>

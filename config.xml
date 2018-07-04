@@ -2,23 +2,21 @@
 
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android" 
-        id          = "com.smartinfologiks.app1"
-        versionCode = "00001"
-        version     = "0.0.1">
- 
-    <name>Dummy App</name>
-    
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.silk.app1" 
+        versionCode = "000000"
+        version="0.0.0" >
+  
+    <name>SILK</name>
     <description>
-        This is simple boilerplate mobile app.
+        SILK - New App
     </description>
- 
-    <author href="http://smartinfologiks.com/" email="admin@smartinfologiks.com">
-        OpenLogiks Team
+    <author email="admin@smartinfologiks.com" href="http://smartinfologiks.com">
+        SILK Team
     </author>
-	
+  
     <icon src='/icon.png' width="100" height="100" />
-    
+
     <icon src='/media/logos/logox30.png' width="30" height="30" />
     <icon src='/media/logos/logox57.png' width="57" height="57" />
     <icon src='/media/logos/logox60.png' width="60" height="60" />
@@ -31,28 +29,42 @@
     <icon src='/media/logos/logox160.png' width="160" height="160" />
     <icon src='/media/logos/logox250.png' width="250" height="250" />
 
-    <preference name="SplashScreen" value="media/splash/screen1.png" />
-    <preference name="SplashScreenDelay" value="10000"/>
-    
+    <preference name="SplashScreen" value="/media/splash/apploader.gif" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <platform name="android">
+        <splash density="land-hdpi" src="/media/logos/logox152.png" />
+        <splash density="land-ldpi" src="/media/logos/logox152.png" />
+        <splash density="land-mdpi" src="/media/logos/logox152.png" />
+        <splash density="land-xhdpi" src="/media/logos/logox152.png" />
+        <splash density="port-hdpi" src="/media/logos/logox152.png" />
+        <splash density="port-ldpi" src="/media/logos/logox152.png" />
+        <splash density="port-mdpi" src="/media/logos/logox152.png" />
+        <splash density="port-xhdpi" src="/media/logos/logox152.png" />
+    </platform>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="ios-package" value="CDVSplashScreen" />
+    </feature>
+
     <preference name="KeepRunning" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="ShowTitle" value="false" />
-    
+    <preference name="ShowTitle" value="true" />
+
     <preference name="LogLevel" value="VERBOSE"/>
-    
+
     <preference name="EnableViewportScale" value="false"/>
     <preference name="BackupWebStorage" value="local"/>
     <preference name="TopActivityIndicator" value="white"/>
     <preference name="AndroidLaunchMode" value="singleTask" />
-
-    <!-- <preference name="target-device" value="universal" /> -->
-    <preference name="target-device" value="handset" />
+    <preference name="target-device" value="universal" />
+<!--     <preference name="target-device" value="handset" /> -->
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="false" />
-
-    <!-- <preference name="permissions" value="none"/> -->
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 
     <!-- to enable individual permissions use the following examples -->
+    <feature name="http://api.phonegap.com/1.0/device"/>
     <feature name="http://api.phonegap.com/1.0/battery"/>
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <feature name="http://api.phonegap.com/1.0/contacts"/>
@@ -63,32 +75,37 @@
     <feature name="http://api.phonegap.com/1.0/notification"/>
 
     <!-- <content src="index.html" /> -->
+    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
+
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+
+    <engine name="android" spec="^6.4.0" />
 
     <!-- Core plugins -->
     <gap:plugin name="org.apache.cordova.camera" version="0.3.2" />
     <gap:plugin name="org.apache.cordova.device" version="0.2.12" />
     <gap:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
-    <gap:plugin name="org.apache.cordova.file-transfer" version="0.4.6" />
     <gap:plugin name="org.apache.cordova.media" version="0.2.13" />
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+    <gap:plugin name="cordova-plugin-geolocation" source="pgb" version="2.2.0" />
+    <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
+    <gap:plugin name="cordova-plugin-screen-orientation" source="npm" version="*" />
+    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" version="5.2.0" />
+    <gap:plugin name="cordova-plugin-app-version" source="pgb" version="0.1.9" />
+    <gap:plugin name="cordova.plugins.diagnostic" source="npm" version="0.1.9" />
 
-
-    <!-- Third party plugins -->
-    <gap:plugin name="wellbload.cordova.appversion" version="0.1.4" />
-
-    <!-- <gap:plugin name="com.phonegap.plugins.pushplugin" /> -->
-    <!-- <gap:plugin name="uk.co.whiteoctober.cordova.appversion" /> -->
-
-    <!-- <gap:plugin name="de.appplant.cordova.plugin.local-notification" version="0.7.5" /> -->
-
-    <!--<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.5.0" /> -->
-
-    <!-- <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.8" /> -->
-    
-    <!-- <gap:plugin name="com.danielcwilson.plugins.googleanalytics" version="0.6.1" /> -->
-
-    <!-- <gap:plugin name="com.google.playservices" /> -->
-    <!-- <gap:plugin name="com.tapstream.phonegap" version="1.0.4" /> -->
-
+    <!-- Dynamically added plugins -->
 </widget>
