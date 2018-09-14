@@ -9,146 +9,26 @@
         <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval' ;"/>
         <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
 
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" />
-        
-        <link rel="stylesheet" type="text/css" href="assets/css/cbp-spmenu.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/colors.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/shapes.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css" />
       
-        <link rel="stylesheet" type="text/css" href="assets/css/layout.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/theme.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/basic.css" />
+<!--         <link rel="stylesheet" type="text/css" href="assets/css/theme-default.css" /> -->
       
-        <link rel="stylesheet" type="text/css" href="app/css/style.css" />
-        <link rel="stylesheet" type="text/css" href="app/css/app.css" />
-
-        <script src="assets/js/libs/require.js"></script>
+        <script src="node_modules/requirejs/require.js"></script>
     </head>
     
-    <body class="cbp-spmenu-push app">
-        <div id="wrap" class='wrapper'>
-            <div id='header' class='header container'>
-              <div class="navbar navbar-inverse navbar-fixed-top">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle navbar-back pull-left">
-                        <span class="glyphicon glyphicon-chevron-left pull-left"></span>
-                    </button>
-                  	<div class="logoPart">
-                  		<img src="app/media/images/mainlogo1.png" alt="logo">
-                  		
-                  	</div>
-                    
-                    <button type="button" class="navbar-toggle" data-for='cbp-spmenu-s1'>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                  
-                    <a class="navbar-brand"></a>
-                </div>
-              </div>
-            </div>
-            <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1" style="overflow:auto;">
-              <div class='mimicHeaderBar'>
-                <div class='buttonSpace'>
-                  <button type="button" class="navbar-toggle menu-close">
-                    <span class="glyphicon glyphicon-chevron-right" style="font-size: 1.3em;margin-top: -5px;margin-right: 3px;"></span>
-                  </button>
-                </div>
-              </div>
-              <div id='userProfile' class='userProfileInBar'>
-                <!--<div class="thumbnail">-->
-                <!--  <a href='#profile' style="padding: 0px;border: 0px;"><img src=""></a>-->
-                <!--</div>-->
-                <!--<div class="infoData">-->
-                <!--  <div class='title'></div>-->
-                <!--  <div class='small'></div>-->
-                <!--</div>-->
-                <div class="menu-top1">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <a href="#profile">
-                            <img src="app/media/images/user-6.png" width="100%" height="auto">
-                            </a>
-                        </div>
-                        <div class="col-xs-9">
-                            <h4>User<br/><small>Maharashtra, India</small></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-top2">
-                    <div class="row text-center">
-                        <div class="col-xs-6">
-                            <img src="app/media/images/location3.png" width="26%" height="auto">
-                            <p>My Places
-                            <p>
-                        </div>
-                        <div class="col-xs-6">
-                            <img src="app/media/images/Suitcase_icon1.png" width="30%" height="auto">
-                            <p>My Trip</p>
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div id='menuLoader' class='menuContainer ajaxloading' style="min-height: 120%;">
-                <br/>
-                <br/>Loading Menus
-              </div>
-            </nav>
-
-            <div id='mainContainer' class="home-view container">
-              <div class='appLoaderSpinner fa fa-spinner fa-spin fa-4x'></div>
-            </div>
-
-            <div id='popupoverIcon' class='popupoverIcon footer'>
-<!--               <a class='glyphicon glyphicon-search pageLink' href='#search'></a> -->
-                <!-- <a href='#test' class='glyphicon glyphicon-plus actionIcon pageLink'></a> -->
-              <!-- <div class='glyphicon glyphicon-camera actionIcon' cmd='upload'></div>
-                <div class='glyphicon glyphicon-picture actionIcon' cmd='attach'></div>
-                <div class='glyphicon glyphicon-remove actionIcon' cmd=''></div> -->
-            </div>
-            <div id='appCommonHTML' class='hidden'>
-                
-            </div>
-            <div id="footer" class='footer'>
-              <!--<ul class="nav nav-pills pills2">-->
-<!--                 <li role='presentation'><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
-                <li role='presentation'><a href="#"><span class="glyphicon glyphicon-search"></span></a></li> -->
-              <!--</ul>-->
-              <div class="navbar navbar-default navbar-fixed-bottom transperant-bg1">
-                <div class="container footer-bag">
-                    <div class="row text-center">
-                        <div class="col-xs-3">
-                            <a href="#home">
-                            <img src="app/media/images/home2.png" width="50%" height="auto">
-                            </a>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#app-cat-view">
-                            <img src="app/media/images/cat3.png" width="50%" height="auto">
-                            </a>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#home">
-                            <img src="app/media/images/location4.png" width="50%" height="auto">
-                            </a>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#home">
-                            <img src="app/media/images/user2.png" width="50%" height="auto">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-     
+    <body>
+      <div id='pageWrapper'>
+        <h1 align=center><br><br>
+          <img src='assets/media/apploader.gif' width='35%' />
+          <br><br>Loading...
+        </h1>
+      </div>
+      <div id='templates' class='hidden'>
+        
+      </div>
     </body>
-	
     <script src="assets/js/startup.js"></script>
     <script src="cordova.js"></script>
-    
 </html>
