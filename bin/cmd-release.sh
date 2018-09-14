@@ -1,6 +1,6 @@
 #!/bin/sh
 
-./cmd-setup.sh
+./bin/cmd-setup.sh
 
 rm dist/android-release.apk
 

@@ -6,3 +6,7 @@ node_modules/
 .thumbs
 .DS_Store
 todos.txt
+
+config.xml
+package-lock.json
+package.json

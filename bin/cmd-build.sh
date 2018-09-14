@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./cmd-setup.sh
+./bin/cmd-setup.sh
 
 rm dist/android-debug.apk
 
