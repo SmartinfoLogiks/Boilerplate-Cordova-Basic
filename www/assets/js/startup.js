@@ -1,3 +1,6 @@
+if(module==null) {
+  var module = {};
+}
 requirejs.config({
             baseUrl: 'assets/js',
             paths: {
@@ -11,7 +14,7 @@ requirejs.config({
 require(["npmjs/moment/moment"], function(obj) {
           window.moment = obj;
       });
-require(["npmjs/vue/dist/vue"], function(obj1) {
+require(["npmjs/vue/dist/vue.min"], function(obj1) {
         window.Vue = obj1;
       });
 require(["npmjs/handlebars/dist/handlebars.min"], function (ko) {
@@ -20,22 +23,30 @@ require(["npmjs/handlebars/dist/handlebars.min"], function (ko) {
           
         });
     });
+require(["md5"], function(obj1) {
+        window.md5 = obj1;
+      });
 requirejs([
   "npmjs/jquery/dist/jquery",
 ], function(obj1) {
   requirejs([
     "npmjs/bootstrap/dist/js/bootstrap.bundle.min",
     "npmjs/jquery-ui/build/release",
+    "base64",
     
     "commons",
+    "framework.commons",
+    "framework.ui",
     "framework.remote",
     "framework.triggers",
   ], function(obj1) {
     requirejs([
         "framework",
-        "npmjs/bootbox/bootbox.min",
       ], function(obj1) {
-        window.bootbox = obj1;
+        require(["npmjs/bootbox/bootbox.min"], function(obj1) {
+          window.bootbox = obj1;
+        });
+      
         $.getJSON("app.json",function(data) {
               appConfig=data;
 

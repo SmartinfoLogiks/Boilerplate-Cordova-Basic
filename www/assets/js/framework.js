@@ -1,15 +1,34 @@
-var appConfig = {};
+$(function() {
+   console.log("App Load Time: ", ((Date.now()-appTimerStart)+1800)/1000,' Secs');
+});
 
 function loadAppCore() {
   pageHash = window.location.hash;
   
+  registerEventListeners();
+  
   loadPage(pageHash);
   
-  //loadPage("home");
   //loadMenus();
   //loadUserinfoBar();
-  //pageBrowser();
+  
+  console.log("App Finish Time: ", ((Date.now()-appTimerStart)+1800)/1000,' Secs');
 }
+function reloadAppCore(pageRef) {
+  cleanWorkspace();
+  loadPage(pageRef);
+  //loadMenus();
+  //loadUserinfoBar();
+}
+
+function registerEventListeners() {
+  
+}
+
+function registerPageEvents() {
+  
+}
+
 function cleanWorkspace() {
   $("#mainContainer").html("");
   $("#templates").html("");
@@ -33,6 +52,7 @@ function loadPage(pageRef, callBack) {
 		$("body").attr("class",pageRef+"-body app");
 		$("#mainContainer").attr("class",pageRef+"-view container-fluid").html(html);
 
+    registerPageEvents();
 		//_TRIGGERS.runTriggers('onPagePostload',pageRef);
 	}).done(function() {
 		_TRIGGERS.runTriggers('onPageLoad', pageRef);
