@@ -8,22 +8,22 @@ You can then run bin/cmd-build.sh to create your first dummy app.
 
 
 ## Other libraries that can be usefull
-lodash    Utility library
-threads   Web worker library
-base64
-md5
-chart
-pouchdb
++ lodash                                    Utility library
++ threads                                   Web worker library
++ base64
++ md5
++ chart
++ pouchdb
 
-filesaver
++ filesaver
 
-jquery.geocomplete
-jquery.sparkline
-jquery.validate
++ jquery.geocomplete
++ jquery.sparkline
++ jquery.validate
 
-bootstrap.datepicker
-bootstrap.datetimepicker
-bootstrap.multiselect
-bootstrap.switch
++ bootstrap.datepicker
++ bootstrap.datetimepicker
++ bootstrap.multiselect
++ bootstrap.switch
 
-quo.standalone
++ quo.standalone

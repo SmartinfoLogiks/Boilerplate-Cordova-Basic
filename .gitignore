@@ -7,6 +7,4 @@ node_modules/
 .DS_Store
 todos.txt
 
-config.xml
 package-lock.json
-package.json
