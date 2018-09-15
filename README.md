@@ -8,10 +8,8 @@ You can then run bin/cmd-build.sh to create your first dummy app.
 
 
 ## Other libraries that can be usefull
-+ lodash                                    Utility library
-+ threads                                   Web worker library
-+ base64
-+ md5
++ lodash                                   : Utility library
++ threads                                  : Web worker library
 + chart
 + pouchdb
 
