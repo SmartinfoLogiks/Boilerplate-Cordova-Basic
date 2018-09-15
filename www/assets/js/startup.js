@@ -42,6 +42,7 @@ requirejs([
   ], function(obj1) {
     requirejs([
         "framework",
+        "app/app"
       ], function(obj1) {
         require(["npmjs/bootbox/bootbox.min"], function(obj1) {
           window.bootbox = obj1;

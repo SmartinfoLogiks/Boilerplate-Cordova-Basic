@@ -18,6 +18,7 @@ You can then run bin/cmd-build.sh to create your first dummy app.
 + jquery.geocomplete
 + jquery.sparkline
 + jquery.validate
++ jquery.easing
 
 + bootstrap.datepicker
 + bootstrap.datetimepicker

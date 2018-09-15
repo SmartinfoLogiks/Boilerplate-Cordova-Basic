@@ -1,7 +1,3 @@
-$(function() {
-   console.log("App Load Time: ", ((Date.now()-appTimerStart)+1800)/1000,' Secs');
-});
-
 function loadAppCore() {
   pageHash = window.location.hash;
   
@@ -12,13 +8,15 @@ function loadAppCore() {
   //loadMenus();
   //loadUserinfoBar();
   
-  console.log("App Finish Time: ", ((Date.now()-appTimerStart)+1800)/1000,' Secs');
+  initApp();
 }
 function reloadAppCore(pageRef) {
   cleanWorkspace();
   loadPage(pageRef);
   //loadMenus();
   //loadUserinfoBar();
+  
+  reinitApp();
 }
 
 function registerEventListeners() {
@@ -55,8 +53,10 @@ function loadPage(pageRef, callBack) {
     registerPageEvents();
 		//_TRIGGERS.runTriggers('onPagePostload',pageRef);
 	}).done(function() {
+    pageLoaded(pageRef, "success");
 		_TRIGGERS.runTriggers('onPageLoad', pageRef);
 	}).fail(function() {
+    pageLoaded(pageRef, "error");
 		_TRIGGERS.runTriggers('onPageError', pageRef);
 	}).always(function() {
     
@@ -65,7 +65,7 @@ function loadPage(pageRef, callBack) {
     //Load components
     //Initiate Events
     
-		if(callBack!=null && window[callBack]!=null) {
+    if(callBack!=null && window[callBack]!=null) {
       window[callBack](compName);
     }
 	});
