@@ -1,8 +1,5 @@
-$(function() {
-  //console.log("LOADED");
-  
-  
-});
+var appConfig = {};
+
 function loadAppCore() {
   pageHash = window.location.hash;
   
@@ -17,6 +14,7 @@ function cleanWorkspace() {
   $("#mainContainer").html("");
   $("#templates").html("");
 }
+
 function loadPage(pageRef, callBack) {
   if(pageRef==null || pageRef.length<=0) {
     pageRef = appConfig.PAGEHOME;
@@ -35,11 +33,11 @@ function loadPage(pageRef, callBack) {
 		$("body").attr("class",pageRef+"-body app");
 		$("#mainContainer").attr("class",pageRef+"-view container-fluid").html(html);
 
-		//triggerEvents.runTriggers('onPagePostload',pageRef);
+		//_TRIGGERS.runTriggers('onPagePostload',pageRef);
 	}).done(function() {
-		triggerEvents.runTriggers('onPageLoad', pageRef);
+		_TRIGGERS.runTriggers('onPageLoad', pageRef);
 	}).fail(function() {
-		triggerEvents.runTriggers('onPageError', pageRef);
+		_TRIGGERS.runTriggers('onPageError', pageRef);
 	}).always(function() {
     
     //Update Menu Title
@@ -52,13 +50,13 @@ function loadPage(pageRef, callBack) {
     }
 	});
 }
+
 function loadComponent(compName, callBack) {
   //$.getScript("./app/comps/topbar/index.js", function() {});
-  $.get("app/comps/" + compName + ".html", function(html) {
-    $("#templates").append(html);
-//     require(["app/comps/"+]);
+  $.get("app/comps/" + compName + "/index.html", function(html) {
+    $("#templates").append("<div id='"+compName+"'>"+html+"</div>");
     
-    triggerEvents.runTriggers('onComponentLoad', compName);
+    _TRIGGERS.runTriggers('onComponentLoad', compName);
     
     if(callBack!=null && window[callBack]!=null) {
       window[callBack](compName);

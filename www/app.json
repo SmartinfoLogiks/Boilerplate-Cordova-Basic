@@ -1,27 +1,40 @@
 {
 	"APPTITLE": "New App",
 	"DEBUG": true,
-	"STATUS": "DEBUG",
+	"appstatus": "development",
 	"CHECKONLINE": true,
 	"PAGEHOME": "#home",
 	"PAGEERROR": "#error",
 	"APPKEY": "appkey",
 	"REMOTEKEY": "ASDASDAD",
-	"REFSITE": "home",
 	"URL": "http://smartinfologiks.net/services/",
 	"FEEDBACK": "smartinfologiks@gmail.com",
 	"SUPPORT": "smartinfologiks@gmail.com",
-	"DEFAULTS": {
-		"PING_INTERVAL": 300111,
-		"PROCESS_INTERVAL": 60000,
-		"NOTIFICATION_INTERVAL": 600211,
-		"CACHE_DATA_PERIOD": 300,
-		"CACHE_ASSETS_PERIOD": 604800,
-		"GREEDY_CACHE": false,
-		"CURRENCY": "$"
-	},
-	"KEYS": {
-		"GOOGLE_ANALYTICS": ""
+	"CONFIG": {
+		"production": {
+			"PING_INTERVAL": 300111,
+			"PROCESS_INTERVAL": 60000,
+			"NOTIFICATION_INTERVAL": 600211,
+			"CACHE_DATA_PERIOD": 300,
+			"CACHE_ASSETS_PERIOD": 604800,
+			"GREEDY_CACHE": false,
+			"CURRENCY": "$",
+			"KEYS": {
+				"GOOGLE_ANALYTICS": ""
+			}
+		},
+		"development": {
+			"PING_INTERVAL": 300111,
+			"PROCESS_INTERVAL": 60000,
+			"NOTIFICATION_INTERVAL": 600211,
+			"CACHE_DATA_PERIOD": 300,
+			"CACHE_ASSETS_PERIOD": 604800,
+			"GREEDY_CACHE": false,
+			"CURRENCY": "$",
+			"KEYS": {
+				"GOOGLE_ANALYTICS": ""
+			}
+		}
 	},
 	"lang": {
 		"en-GB": "English"
