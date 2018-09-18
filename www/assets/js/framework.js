@@ -20,7 +20,12 @@ function reloadAppCore(pageRef) {
 }
 
 function registerEventListeners() {
-  
+  $("body").delegate("a.pageLink[href]", "click", function(e) {
+      href = $(this).attr("href");
+      if (href != null && href.length > 1 && href.substr(0, 1) == "#") {
+        loadPage(href.substr(1));
+      }
+    });
 }
 
 function registerPageEvents() {
