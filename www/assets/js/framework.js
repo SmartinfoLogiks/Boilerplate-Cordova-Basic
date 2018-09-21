@@ -26,6 +26,18 @@ function registerEventListeners() {
         loadPage(href.substr(1));
       }
     });
+	
+  $("body").delegate(".actionCmd[cmd],.actionCMD[cmd],.actionIcon[cmd]", "click", function(e) {
+		e.preventDefault();
+
+		cmd = $(this).attr("cmd");
+
+		if (window[cmd] != null && typeof window[cmd] == "function") {
+			window[cmd](this);
+		} else {
+			console.info("Command Not Found", cmd);
+		}
+	});
 }
 
 function registerPageEvents() {
