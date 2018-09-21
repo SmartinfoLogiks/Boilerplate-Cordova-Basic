@@ -84,9 +84,9 @@ function loadPage(pageRef, callBack) {
     
     		if (callBack != null) {
 			if (typeof callBack == "function") {
-				callBack(compName);
+				callBack(pageRef);
 			} else if (window[callBack] != null && typeof window[callBack] == "function") {
-				callBack(compName);
+				callBack(pageRef);
 			}
 		}
 	});
