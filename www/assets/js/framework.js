@@ -82,9 +82,13 @@ function loadPage(pageRef, callBack) {
     //Load components
     //Initiate Events
     
-    if(callBack!=null && window[callBack]!=null) {
-      window[callBack](compName);
-    }
+    		if (callBack != null) {
+			if (typeof callBack == "function") {
+				callBack(compName);
+			} else if (window[callBack] != null && typeof window[callBack] == "function") {
+				callBack(compName);
+			}
+		}
 	});
 }
 
