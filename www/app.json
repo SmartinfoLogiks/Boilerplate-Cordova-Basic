@@ -6,10 +6,10 @@
 	"PAGEHOME": "#home",
 	"PAGEERROR": "#error",
 	"APPKEY": "appkey",
-  "REFSITE":"cms",
-	"URL": "http://smartinfologiks.net/services/",
-	"FEEDBACK": "smartinfologiks@gmail.com",
-	"SUPPORT": "smartinfologiks@gmail.com",
+  	"REFSITE":"cms",
+	"URL": "http://openlogiks.net/services/",
+	"FEEDBACK": "openlogiks@gmail.org",
+	"SUPPORT": "openlogiks@gmail.org",
 	"CONFIG": {
 		"production": {
 			"PING_INTERVAL": 300111,
@@ -40,15 +40,15 @@
 		"en-GB": "English"
 	},
 	"MARKETS": {
-		"ANDROID": "com.smartinfologiks.app",
+		"ANDROID": "com.openlogiks.app",
 		"IOS": "",
 		"WINDOWS": "",
 		"BLACKBERRY": ""
 	},
 	"LINKS": {
-		"TERMS": "http://www.smartinfologiks.com/about/terms",
-		"PRIVACY": "http://www.smartinfologiks.com/about/privacy",
-		"ABOUT": "http://www.smartinfologiks.com/about"
+		"TERMS": "http://www.openlogiks.org/about/terms",
+		"PRIVACY": "http://www.openlogiks.org/about/privacy",
+		"ABOUT": "http://www.openlogiks.org/about"
 	},
 	"PAGECONFIG": {
 		"NOHEADER": [

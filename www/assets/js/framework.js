@@ -8,7 +8,7 @@ function loadAppCore() {
   //loadMenus();
   //loadUserinfoBar();
   
-  initApp();
+  if(typeof window['initApp']=="function") initApp();
 }
 function reloadAppCore(pageRef) {
   cleanWorkspace();
@@ -56,6 +56,8 @@ function loadPage(pageRef, callBack) {
   if(pageRef.substr(0,1)=="#") {
     pageRef = pageRef.substr(1);
   }
+
+  if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
   //cleanWorkspace();
   
   $.get("app/pages/" + pageRef + ".html", function(html) {
