@@ -23,7 +23,9 @@ function registerEventListeners() {
   $("body").delegate("a.pageLink[href]", "click", function(e) {
       href = $(this).attr("href");
       if (href != null && href.length > 1 && href.substr(0, 1) == "#") {
-        loadPage(href.substr(1));
+        href = href.substr(1);
+			href1 = href.split("/");
+			loadPage(href1[0]);
       }
     });
 	
@@ -57,6 +59,33 @@ function loadPage(pageRef, callBack) {
     pageRef = pageRef.substr(1);
   }
 
+	if (appConfig.PAGECONFIG.NOHEADER != null && appConfig.PAGECONFIG.NOHEADER.length > 0) {
+		if (appConfig.PAGECONFIG.NOHEADER.inArray(pageRef)) {
+			$("#topbar").hide();
+		} else {
+			$("#topbar").show();
+		}
+	}
+
+	//No Footer Required
+	if (appConfig.PAGECONFIG.NOFOOTER != null && appConfig.PAGECONFIG.NOFOOTER.length > 0) {
+		if (appConfig.PAGECONFIG.NOFOOTER.inArray(pageRef)) {
+			$("#footer").hide();
+		} else {
+			$("#footer").show();
+		}
+	}
+
+	//Login Required
+	if (appConfig.PAGECONFIG.NOLOGIN != null && appConfig.PAGECONFIG.NOLOGIN.length > 0) {
+		if (!appConfig.PAGECONFIG.NOLOGIN.inArray(pageRef)) {
+			if (!_AUTH.isLoggedIn()) {
+				loadPage("#login");
+				lgksToast("Login Required");
+				return;
+			}
+		}
+	}
   if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
   //cleanWorkspace();
   
@@ -78,17 +107,19 @@ function loadPage(pageRef, callBack) {
     pageLoaded(pageRef, "error");
 		_TRIGGERS.runTriggers('onPageError', pageRef);
 	}).always(function() {
-    
-    //Update Menu Title
-    //Initiate Page Elements
-    //Load components
-    //Initiate Events
+
+		pageTitle = pageRef.replace("#", "").replace("_", " ").capitalize();
+		//Update Menu Title
+		$(".TOPBAR-TITLE").html(pageTitle);
+		//Initiate Page Elements
+		//Load components
+		//Initiate Events
     
     		if (callBack != null) {
 			if (typeof callBack == "function") {
 				callBack(pageRef);
 			} else if (window[callBack] != null && typeof window[callBack] == "function") {
-				callBack(pageRef);
+				window[callBack](pageRef);
 			}
 		}
 	});

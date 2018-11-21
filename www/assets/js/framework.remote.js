@@ -19,7 +19,8 @@ const _REMOTE =  {
   
   getServiceHeader: function() {
     var headers = {
-      "token": getUserToken()
+      "token": getUserToken(),
+      "appkey": appConfig.APPKEY
     };
     return headers;
   },
@@ -29,6 +30,7 @@ const _REMOTE =  {
     if(appConfig.REFSITE!=null && appConfig.REFSITE.length>0) {
       lx+="&site=" + appConfig.REFSITE;
     }
+    lx = lx.replace("?&", "?");
     if(params!=null && typeof params=="object") {
       if(!Array.isArray(params)) {
         q=[];
@@ -106,7 +108,7 @@ const _REMOTE =  {
 					return false;
 				}
 			}
-			_REMOTE.addRemoteCache(l,"", txt);
+			_REMOTE.addRemoteCache(lx,"", txt);
 			
       if (callback != null) callback(txt);
 		})
@@ -159,7 +161,7 @@ const _REMOTE =  {
 					return false;
 				}
 			}
-			_REMOTE.addRemoteCache(l, q, txt);
+			_REMOTE.addRemoteCache(lx, q, txt);
       if (callback != null) callback(txt);
 		})
 		.fail(function(txt) {

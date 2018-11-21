@@ -1,3 +1,6 @@
+if(module==null) {
+  var module = {};
+}
 requirejs.config({
             baseUrl: 'assets/js',
             paths: {
@@ -28,11 +31,12 @@ requirejs([
 ], function(obj1) {
   requirejs([
     "npmjs/bootstrap/dist/js/bootstrap.bundle.min",
-    //"npmjs/jquery-ui/build/release",
+    "npmjs/jquery-ui/build/release",
     "base64",
     
     "commons",
     "framework.commons",
+    "framework.security",
     "framework.ui",
     "framework.remote",
     "framework.triggers",
