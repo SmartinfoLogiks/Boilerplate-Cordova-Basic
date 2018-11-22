@@ -1,5 +1,6 @@
 const _REMOTE =  {
   cacheData : true,
+  pubkey : md5(Math.random()),
   getDataSource : function() {
     if(typeof appConfig.URL=="string") {
       return appConfig.URL;
@@ -20,6 +21,7 @@ const _REMOTE =  {
   getServiceHeader: function() {
     var headers = {
       "token": getUserToken(),
+      "pubkey": md5(_REMOTE.pubkey+appConfig.APPKEY+appVersionCode+currentUser),
       "appkey": appConfig.APPKEY
     };
     return headers;
