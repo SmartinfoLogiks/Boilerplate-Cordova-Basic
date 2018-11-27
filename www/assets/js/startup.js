@@ -31,7 +31,7 @@ requirejs([
 ], function(obj1) {
   requirejs([
     "npmjs/bootstrap/dist/js/bootstrap.bundle.min",
-    "npmjs/jquery-ui/build/release",
+    // "npmjs/jquery-ui/build/release",
     "base64",
     
     "commons",

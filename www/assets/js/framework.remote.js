@@ -2,20 +2,20 @@ const _REMOTE =  {
   cacheData : true,
   pubkey : md5(Math.random()),
   getDataSource : function() {
-    if(typeof appConfig.URL=="string") {
-      return appConfig.URL;
+    if(getUserSettings("URI_DATA")==null) {
+      setUserSettings("URI_DATA", appConfig.URL);
     }
-    if(appConfig.URL.DATASRC==null) {
-      appConfig.URL.DATASRC=getUserSettings("DATASRC");
-    }
-    return appConfig.URL.DATASRC;
+    return getUserSettings("URI_DATA");
   },
     
   getIdentitySource: function() {
-    if(typeof appConfig.URL=="string") {
-      return md5(appConfig.URL);
+    if(getUserSettings("URI_IDENTITY")==null) {
+      if(appConfig.IDENTITY_URL==null) {
+        appConfig.IDENTITY_URL = appConfig.URL;
+      }
+      setUserSettings("URI_IDENTITY", appConfig.IDENTITY_URL);
     }
-    return appConfig.URL.IDENTITY;
+    return getUserSettings("URI_IDENTITY");
   },
   
   getServiceHeader: function() {
@@ -28,7 +28,10 @@ const _REMOTE =  {
   },
   
   getServiceCMD: function(path, params, format) {
-    lx = _REMOTE.getDataSource() + path + "?APPKEY=" + appConfig.APPKEY;
+    if (!(format != null && format.length > 0)) {
+      format="json";
+    }
+    lx = _REMOTE.getDataSource() + path + "?format=" + format;
     if(appConfig.REFSITE!=null && appConfig.REFSITE.length>0) {
       lx+="&site=" + appConfig.REFSITE;
     }
@@ -46,10 +49,7 @@ const _REMOTE =  {
     if(params!=null && params.length>0) {
       lx+="&"+params;
     }
-    if (format != null && format.length > 0) lx += "&format=" + format;
-    else lx += "&format=json";
-    
-    lx += "&currentUser=" + getUserID();
+    //lx += "&currentUser=" + getUserID();
     
     return lx;
   },
@@ -67,19 +67,20 @@ const _REMOTE =  {
     }
     
     $.ajax({
-			type: "GET",
-			url: lx
-		}).done(function(txt) {
-			_REMOTE.addRemoteCache(lx,"", txt);
+      type: "GET",
+      url: lx,
+      headers: _REMOTE.getServiceHeader()
+    }).done(function(txt) {
+      _REMOTE.addRemoteCache(lx,"", txt);
       
       callback(txt);
-		}).fail(function(err) {
-				frameworkError(txt);
+    }).fail(function(err) {
+        frameworkError(txt);
 
         if (errorCallback != null) errorCallback(err);
-		}).always(function(txt) {
+    }).always(function(txt) {
 
-		});
+    });
   },
   
   processAJAXQuery: function(lx, callback, errorCallback, reCache) {
@@ -95,43 +96,43 @@ const _REMOTE =  {
     }
     
     $.ajax({
-			type: "GET",
-			url: lx,
-			headers: _REMOTE.getServiceHeader()
-		}).done(function(txt) {
-			if(typeof txt=="object") {
-				if(txt.error!=null) {
-					if(txt.error.code==401) {
-						logoutDirect();
-					} else {
-						frameworkError(txt.error.code+", "+txt.error.msg);
-					}
-					if (errorCallback != null) errorCallback(txt);
-					return false;
-				}
-			}
-			_REMOTE.addRemoteCache(lx,"", txt);
-			
+      type: "GET",
+      url: lx,
+      headers: _REMOTE.getServiceHeader()
+    }).done(function(txt) {
+      if(typeof txt=="object") {
+        if(txt.error!=null) {
+          if(txt.error.code==401) {
+            logoutDirect();
+          } else {
+            frameworkError(txt.error.code+", "+txt.error.msg);
+          }
+          if (errorCallback != null) errorCallback(txt);
+          return false;
+        }
+      }
+      _REMOTE.addRemoteCache(lx,"", txt);
+      
       if (callback != null) callback(txt);
-		})
-		.fail(function(err) {
-			if(typeof err=="object") {
-				if(err.status==401) {
-					logoutDirect("#auth_login");
-				} else if(err.error!=null && err.error.code!=null) {
-					frameworkError(err.error.code+", "+err.error.msg);
-					if (errorCallback != null) errorCallback(err);
-					return false;
-				}
-			} else {
+    })
+    .fail(function(err) {
+      if(typeof err=="object") {
+        if(err.status==401) {
+          logoutDirect("#auth_login");
+        } else if(err.error!=null && err.error.code!=null) {
+          frameworkError(err.error.code+", "+err.error.msg);
+          if (errorCallback != null) errorCallback(err);
+          return false;
+        }
+      } else {
         frameworkError(txt);
       }
 
       if (errorCallback != null) errorCallback(err);
-		})
-		.always(function(txt) {
+    })
+    .always(function(txt) {
 
-		});
+    });
   },
   processAJAXPostQuery: function(lx, q, callback, errorCallback, reCache) {
     if (appConfig.DEBUG) console.debug("POST:" + lx);
@@ -146,41 +147,41 @@ const _REMOTE =  {
     }
     
     $.ajax({
-			type: "POST",
-			url: lx,
-			data: q,
-			headers: _REMOTE.getServiceHeader()
-		}).done(function(txt) {
-			if(typeof txt=="object") {
-				if(txt.error!=null) {
-					if(txt.error.code==401) {
-						logoutDirect();
-					} else {
-						frameworkError(txt.error.code+", "+txt.error.msg);
-					}
-					frameworkError(txt.error.code+", "+txt.error.msg);
-					if (errorCallback != null) errorCallback(txt);
-					return false;
-				}
-			}
-			_REMOTE.addRemoteCache(lx, q, txt);
+      type: "POST",
+      url: lx,
+      data: q,
+      headers: _REMOTE.getServiceHeader()
+    }).done(function(txt) {
+      if(typeof txt=="object") {
+        if(txt.error!=null) {
+          if(txt.error.code==401) {
+            logoutDirect();
+          } else {
+            frameworkError(txt.error.code+", "+txt.error.msg);
+          }
+          frameworkError(txt.error.code+", "+txt.error.msg);
+          if (errorCallback != null) errorCallback(txt);
+          return false;
+        }
+      }
+      _REMOTE.addRemoteCache(lx, q, txt);
       if (callback != null) callback(txt);
-		})
-		.fail(function(txt) {
-			if(typeof txt=="object") {
-				if(txt.error!=null && txt.error.code!=null) {
-					frameworkError(txt.error.code+", "+txt.error.msg);
-					if (errorCallback != null) errorCallback(txt);
-					return false;
-				}
-			} else {
+    })
+    .fail(function(txt) {
+      if(typeof txt=="object") {
+        if(txt.error!=null && txt.error.code!=null) {
+          frameworkError(txt.error.code+", "+txt.error.msg);
+          if (errorCallback != null) errorCallback(txt);
+          return false;
+        }
+      } else {
         frameworkError(txt);
       }
-			if (errorCallback != null) errorCallback(txt);
-		})
-		.always(function(txt) {
+      if (errorCallback != null) errorCallback(txt);
+    })
+    .always(function(txt) {
 
-		});
+    });
   },
   
   processAJAXOtherQuery: function(requestType, lx, q, callback, errorCallback) {
