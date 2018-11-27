@@ -1,6 +1,3 @@
-if(module==null) {
-  var module = {};
-}
 requirejs.config({
             baseUrl: 'assets/js',
             paths: {
