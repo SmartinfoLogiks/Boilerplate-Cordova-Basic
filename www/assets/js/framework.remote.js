@@ -1,6 +1,6 @@
 const _REMOTE =  {
   cacheData : true,
-  pubkey : md5(Math.random()),
+  pubkey : null,
   getDataSource : function() {
     if(getUserSettings("URI_DATA")==null) {
       setUserSettings("URI_DATA", appConfig.URL);
