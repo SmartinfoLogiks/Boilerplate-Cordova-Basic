@@ -51,7 +51,9 @@ requirejs([
       
         $.getJSON("app.json",function(data) {
               appConfig=data;
-              appConfig.CONFIG = $.extend(appConfig,appConfig.CONFIG[appConfig.appstatus]);
+              if(appConfig.CONFIG[appConfig.appstatus]!=null) {
+                appConfig.CONFIG = $.extend(appConfig,appConfig.CONFIG[appConfig.appstatus]);
+              }
 
               $("#pageWrapper").load("app/app.html", function() {
                 loadAppCore();
