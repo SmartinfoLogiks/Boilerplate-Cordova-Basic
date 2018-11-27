@@ -6,11 +6,12 @@ const _AUTH={
   validate: function() {
     
   },
-  doLogin: function() {
-    
+  doLogin: function(userid, password) {
+    //USERKEY-USER
+    //USERKEY-TOKEN
   },
   generateToken: function() {
-    
+    //USERKEY-TOKEN
   },
   doLogout: function() {
     if (appConfig.DEBUG) console.warn("Logout Direct Called");
@@ -27,10 +28,19 @@ const _AUTH={
 
     $.getJSON("app.json",function(data) {
             appConfig=data;
+            if(appConfig.CONFIG[appConfig.appstatus]!=null) {
+              appConfig.CONFIG = $.extend(appConfig,appConfig.CONFIG[appConfig.appstatus]);
+            }
+
             reloadAppCore(gotoPage);
         });
   },
   getUserToken: function() {
-    return getUserSettings("USERKEY-AUTH");
+    return getUserSettings("USERKEY-TOKEN");
+  },
+  getUserID: function() {
+    userID = getUserSettings("USERKEY-USER");
+    if (userID == null) return "";
+    else return userID;
   }
 }

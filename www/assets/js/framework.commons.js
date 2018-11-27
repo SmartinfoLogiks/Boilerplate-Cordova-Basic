@@ -20,15 +20,6 @@ function frameworkError(msgCode) {
   console.error(msgCode);
 }
 
-function getUserToken() {
-    return getUserSettings("USERKEY-AUTH");
-}
-function getUserID() {
-    userID = getUserSettings("USERKEY-USER");
-    if (userID == null) return "";
-    else return userID;
-}
-
 //User Settings Storage
 function getUserSettings(key) {
     v = window.localStorage.getItem(key);

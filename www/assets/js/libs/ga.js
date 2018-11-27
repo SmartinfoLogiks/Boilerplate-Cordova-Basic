@@ -27,7 +27,7 @@ function trackView(type, page, subpage) {
 		return;
 	}
 
-	gaPlugin.setUserId(getUserID());
+	gaPlugin.setUserId(_AUTH.getUserID());
 	switch (type) {
 		case "pageview":case "page":case "panel":
 			gaPlugin.trackView(page, '', false, function(e) {}, function(e) {});

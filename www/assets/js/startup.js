@@ -40,6 +40,8 @@ requirejs([
     "framework.ui",
     "framework.remote",
     "framework.triggers",
+    "framework.workers",
+    "uikit",
   ], function(obj1) {
     requirejs([
         "framework",

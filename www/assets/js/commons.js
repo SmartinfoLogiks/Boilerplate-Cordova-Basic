@@ -183,3 +183,28 @@ function callFuncName(funcName,params) {
 	}
 	return null;
 }
+
+function getMarketLink() {
+	if (window['device'] != null) {
+		switch (device.platform.toLowerCase()) {
+			case "android":
+				lx = "market://details?id=" + appConfig.MARKETS.ANDROID;
+				return lx;
+				break;
+			case "ios":
+				//lx="https://itunes.apple.com/app/id"+appConfig.MARKETS.IOS;
+				lx = "itms-apps://itunes.com/apps/id" + appConfig.MARKETS.IOS;
+				return lx;
+				break;
+			case "wince":
+				lx = "ms-windows-store:PDP?PFN=" + appConfig.MARKETS.WINDOWS;
+				return lx;
+				break;
+			case "blackberry":
+				lx = "appworld://content/" + appConfig.MARKETS.BLACKBERRY + "/";
+				return lx;
+				break;
+		}
+	}
+	return "";
+}

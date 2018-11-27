@@ -19,11 +19,15 @@ const _REMOTE =  {
   },
   
   getServiceHeader: function() {
+    if(_REMOTE.pubkey==null) {
+      _REMOTE.pubkey = md5(new Date()+appConfig.APPKEY+appVersionCode);
+    }
     var headers = {
-      "token": getUserToken(),
-      "pubkey": md5(_REMOTE.pubkey+appConfig.APPKEY+appVersionCode+currentUser),
+      "token": _AUTH.getUserToken(),
+      "pubkey": _REMOTE.pubkey,
       "appkey": appConfig.APPKEY
     };
+    //duuid = JSON.stringify(window.device);
     return headers;
   },
   
@@ -49,7 +53,7 @@ const _REMOTE =  {
     if(params!=null && params.length>0) {
       lx+="&"+params;
     }
-    //lx += "&currentUser=" + getUserID();
+    //lx += "&currentUser=" + _AUTH.getUserID();
     
     return lx;
   },

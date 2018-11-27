@@ -2,6 +2,8 @@ function loadAppCore() {
   pageHash = window.location.hash;
   
   registerEventListeners();
+
+  logiksWorkers.initialize();
   
   loadPage(pageHash);
   
@@ -52,12 +54,12 @@ function cleanWorkspace() {
 }
 
 function loadPage(pageRef, callBack) {
-  if(pageRef==null || pageRef.length<=0) {
-    pageRef = appConfig.PAGEHOME;
-  }
-  if(pageRef.substr(0,1)=="#") {
-    pageRef = pageRef.substr(1);
-  }
+	if(pageRef==null || pageRef.length<=0) {
+		pageRef = appConfig.PAGEHOME;
+	}
+	if(pageRef.substr(0,1)=="#") {
+		pageRef = pageRef.substr(1);
+	}
 
 	if (appConfig.PAGECONFIG.NOHEADER != null && appConfig.PAGECONFIG.NOHEADER.length > 0) {
 		if (appConfig.PAGECONFIG.NOHEADER.inArray(pageRef)) {
@@ -86,28 +88,28 @@ function loadPage(pageRef, callBack) {
 			}
 		}
 	}
-  if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
-  //cleanWorkspace();
+  	if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
+  	//cleanWorkspace();
   
-  $.get("app/pages/" + pageRef + ".html", function(html) {
+  	$.get("app/pages/" + pageRef + ".html", function(html) {
 		//Internationalization Of HTML Content
 		html = html.replace(/#[a-zA-Z0-9-_,.]+#/gi, htmlContentReplacer);
 		
-		//updateTitle(pageRef.toTitle());
+		updateTitle(pageRef.toTitle());
 		
 		$("body").attr("class",pageRef+"-body app");
 		$("#mainContainer").attr("class",pageRef+"-view container-fluid").html(html);
 
-    registerPageEvents();
+    	registerPageEvents();
 		//_TRIGGERS.runTriggers('onPagePostload',pageRef);
 	}).done(function() {
-    pageLoaded(pageRef, "success");
+		initAjaxListUI();
+    	pageLoaded(pageRef, "success");
 		_TRIGGERS.runTriggers('onPageLoad', pageRef);
 	}).fail(function() {
-    pageLoaded(pageRef, "error");
+    	pageLoaded(pageRef, "error");
 		_TRIGGERS.runTriggers('onPageError', pageRef);
 	}).always(function() {
-
 		pageTitle = pageRef.replace("#", "").replace("_", " ").capitalize();
 		//Update Menu Title
 		$(".TOPBAR-TITLE").html(pageTitle);
