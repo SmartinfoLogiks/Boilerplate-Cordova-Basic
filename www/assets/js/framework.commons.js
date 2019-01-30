@@ -5,19 +5,28 @@ var appVersionCode=0;
 var appName="";
 
 if(typeof cordova=="object" && typeof cordova.getAppVersion=="function") {
-	cordova.getAppVersion.getVersionNumber(function(d) {
-		appVersionNo=d;
-	});
-	cordova.getAppVersion.getVersionCode((function(d) {
-		appVersionCode=d;
-	}));
-	cordova.getAppVersion.getAppName(function(d) {
-		appName=d;
-	});
+    cordova.getAppVersion.getVersionNumber(function(d) {
+        appVersionNo=d;
+    });
+    cordova.getAppVersion.getVersionCode((function(d) {
+        appVersionCode=d;
+    }));
+    cordova.getAppVersion.getAppName(function(d) {
+        appName=d;
+    });
 }
 
 function frameworkError(msgCode) {
   console.error(msgCode);
+}
+
+function getUserToken() {
+    return getUserSettings("USERKEY-TOKEN");
+}
+function getUserID() {
+    userID = getUserSettings("USERKEY-USER");
+    if (userID == null) return "";
+    else return userID;
 }
 
 //User Settings Storage

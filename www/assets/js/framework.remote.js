@@ -1,41 +1,65 @@
 const _REMOTE =  {
   cacheData : true,
-  pubkey : null,
+  pubkey : md5(Math.random()),
+  dataURL : null,
   getDataSource : function() {
-    if(getUserSettings("URI_DATA")==null) {
-      setUserSettings("URI_DATA", appConfig.URL);
+    if(_REMOTE.dataURL != null && _REMOTE.dataURL.length>0) return _REMOTE.dataURL;
+    
+    dataURL = getUserSettings("DATASRC");
+
+    if(dataURL!=null && dataURL.length>0) {
+      _REMOTE.dataURL = dataURL;
+      return dataURL;
     }
-    return getUserSettings("URI_DATA");
+  
+    if(typeof appConfig.URL=="string" && appConfig.URL.length>0) {
+      dataURL = appConfig.URL;
+    } else if(typeof appConfig.URL=="object" && appConfig.URL.DATASRC==null) {
+      dataURL = appConfig.URL.DATASRC
+    }
+    setUserSettings("DATASRC",dataURL);
+    _REMOTE.dataURL = dataURL;
+    return dataURL;
   },
     
   getIdentitySource: function() {
-    if(getUserSettings("URI_IDENTITY")==null) {
-      if(appConfig.IDENTITY_URL==null) {
-        appConfig.IDENTITY_URL = appConfig.URL;
-      }
-      setUserSettings("URI_IDENTITY", appConfig.IDENTITY_URL);
+    if(_REMOTE.dataURL != null && _REMOTE.dataURL.length>0) return _REMOTE.dataURL;
+    
+    dataURL = getUserSettings("DATASRC");
+
+    if(dataURL!=null && dataURL.length>0) {
+      _REMOTE.dataURL = dataURL;
+      return dataURL;
     }
-    return getUserSettings("URI_IDENTITY");
+  
+    if(typeof appConfig.URL=="string" && appConfig.URL.length>0) {
+      dataURL = appConfig.URL;
+    } else if(typeof appConfig.URL=="object" && appConfig.URL.DATASRC==null) {
+      dataURL = appConfig.URL.DATASRC
+    }
+    setUserSettings("DATASRC",dataURL);
+    _REMOTE.dataURL = dataURL;
+    return dataURL;
   },
   
   getServiceHeader: function() {
-    if(_REMOTE.pubkey==null) {
-      _REMOTE.pubkey = md5(new Date()+appConfig.APPKEY+appVersionCode);
-    }
+    pubKEY = getUserSettings("PUBKEY");
+
     var headers = {
-      "token": _AUTH.getUserToken(),
-      "pubkey": _REMOTE.pubkey,
       "appkey": appConfig.APPKEY
     };
-    //duuid = JSON.stringify(window.device);
+    token = getUserToken();
+    if(token!=null && token.length>0) {
+      headers.token = token;
+    }
+    if(pubKEY!=null && pubKEY.length>0) {
+      headers.pubkey = pubKEY;
+    }
     return headers;
   },
   
   getServiceCMD: function(path, params, format) {
-    if (!(format != null && format.length > 0)) {
-      format="json";
-    }
-    lx = _REMOTE.getDataSource() + path + "?format=" + format;
+    lx = _REMOTE.getDataSource() + path + "?APPKEY=" + appConfig.APPKEY;
     if(appConfig.REFSITE!=null && appConfig.REFSITE.length>0) {
       lx+="&site=" + appConfig.REFSITE;
     }
@@ -53,7 +77,10 @@ const _REMOTE =  {
     if(params!=null && params.length>0) {
       lx+="&"+params;
     }
-    //lx += "&currentUser=" + _AUTH.getUserID();
+    if (format != null && format.length > 0) lx += "&format=" + format;
+    else lx += "&format=json";
+    
+    lx += "&currentUser=" + getUserID();
     
     return lx;
   },
@@ -72,8 +99,7 @@ const _REMOTE =  {
     
     $.ajax({
       type: "GET",
-      url: lx,
-      headers: _REMOTE.getServiceHeader()
+      url: lx
     }).done(function(txt) {
       _REMOTE.addRemoteCache(lx,"", txt);
       
