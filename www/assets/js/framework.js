@@ -25,9 +25,9 @@ function registerEventListeners() {
   $("body").delegate("a.pageLink[href]", "click", function(e) {
       href = $(this).attr("href");
       if (href != null && href.length > 1 && href.substr(0, 1) == "#") {
-        href = href.substr(1);
-			href1 = href.split("/");
-			loadPage(href1[0]);
+        	//href = href.substr(1);
+			//href1 = href.split("/");
+			loadPage(href);
       }
     });
 	
