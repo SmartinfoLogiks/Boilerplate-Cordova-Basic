@@ -4,6 +4,11 @@ function initAjaxListUI() {
 	$('.ajaxlist[data-url][data-template]').each(function() {
 		loadAjaxListUI(this);
 	});
+	$('.ajaxComponent[data-component]').each(function() {
+		$(this).load("app/comps/" + $(this).data("component") + ".html", function() {
+			$(this).removeClass("ajaxComponent");
+		});
+	});
 }
 
 function reloadAjaxListUI(ele) {

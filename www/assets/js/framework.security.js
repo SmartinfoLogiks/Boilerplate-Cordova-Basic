@@ -1,6 +1,10 @@
 const _AUTH={
   isLoggedIn : function() {
-    return false;
+	if (getUserSettings("USERKEY-TOKEN") == null) {
+			return false;
+	} else {
+		return true;
+	}
   },
     
   validate: function(userID) {
@@ -33,7 +37,7 @@ const _AUTH={
   generateToken: function() {
     //USERKEY-TOKEN
   },
-  doLogout: function() {
+  doLogout: function(gotoPage) {
     if (appConfig.DEBUG) console.warn("Logout Direct Called");
     
     if(gotoPage==null || gotoPage.length<=0) gotoPage=appConfig.PAGEHOME;

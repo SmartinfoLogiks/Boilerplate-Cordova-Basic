@@ -4,6 +4,10 @@ var appVersionNo=0;
 var appVersionCode=0;
 var appName="";
 
+var appPageHistory = [];
+var pageCurrent = "";
+var pageLast = "";
+
 if(typeof cordova=="object" && typeof cordova.getAppVersion=="function") {
     cordova.getAppVersion.getVersionNumber(function(d) {
         appVersionNo=d;
@@ -20,15 +24,6 @@ function frameworkError(msgCode) {
   console.error(msgCode);
 }
 
-function getUserToken() {
-    return getUserSettings("USERKEY-TOKEN");
-}
-function getUserID() {
-    userID = getUserSettings("USERKEY-USER");
-    if (userID == null) return "";
-    else return userID;
-}
-
 //User Settings Storage
 function getUserSettings(key) {
     v = window.localStorage.getItem(key);
@@ -41,7 +36,8 @@ function getUserSettings(key) {
             return null;
         }
     }
-    if(v.charAt(0)=="{" && v.charAt(v.length-1)=="}") {
+	if ((v.charAt(0) == "{" && v.charAt(v.length - 1) == "}") ||
+		(v.charAt(0) == "[" && v.charAt(v.length - 1) == "]")) {
         try {
             v=$.parseJSON(v);
         } catch(e) {
@@ -60,4 +56,30 @@ function setUserSettings(key, v) {
 
 function deleteUserSettings(key) {
     window.localStorage.removeItem(key);
+}
+
+function getAuthorizationHeaders() {
+    return {};
+}
+
+function getDeviceID() {
+    return md5((device.model+"-"+device.serial+"-"+device.uuid).replace(/ /g,'').toLowerCase());
+}
+
+function getDeviceKEY() {
+	key = [device.model, device.serial, device.uuid];
+
+	return key.join("-").trim().toLowerCase();
+}
+
+function getGeoKEY(callBack) {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		callBack([position.coords.latitude, position.coords.longitude, position.coords.altitude].join(","));
+	}, function(err) {
+		callBack("");
+	});
+}
+
+function getDeviceHash() {
+	return md5(getDeviceKEY());
 }

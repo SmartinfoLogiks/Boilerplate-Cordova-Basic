@@ -51,6 +51,9 @@ Array.prototype.inArray = function(value) {
 	return false;
 };
 
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
 String.prototype.startsWith = function(str) {
 	return (this.match("^" + str) == str)
 }
@@ -147,6 +150,15 @@ function isElementInViewport(el) {
 	);
 }
 
+//Flips JSON Objects
+function flip(json){
+  var ret = {};
+  for(var key in json){
+    ret[json[key]] = key;
+  }
+  return ret;
+}
+
 function throttle(fn, delay) {
 	var timer = null;
 	return function() {
@@ -171,6 +183,11 @@ function requirecss(urls) {
 		link.href = urls;
 		document.getElementsByTagName("head")[0].appendChild(link);
 	}
+}
+
+function human_filesize($size, $precision = 2) {
+    for($i = 0; ($size / 1024) > 0.9; $i++, $size /= 1024) {}
+    return Math.round($size, $precision)+" "+['B','kB','MB','GB','TB','PB','EB','ZB','YB'][$i];
 }
 
 function callFuncName(funcName,params) {

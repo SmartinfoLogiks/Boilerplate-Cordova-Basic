@@ -26,8 +26,8 @@ function registerEventListeners() {
       href = $(this).attr("href");
       if (href != null && href.length > 1 && href.substr(0, 1) == "#") {
         	//href = href.substr(1);
-			//href1 = href.split("/");
-			loadPage(href);
+		//href1 = href.split("/");
+		loadPage(href);
       }
     });
 	
@@ -42,6 +42,12 @@ function registerEventListeners() {
 			console.info("Command Not Found", cmd);
 		}
 	});
+	$("body").delegate(".goBackLink", "click", function(e) {
+		goBack();
+	});
+	
+	//System Event
+	document.addEventListener("backbutton", function(e) {goBack();}, false);
 }
 
 function registerPageEvents() {
@@ -60,6 +66,8 @@ function loadPage(pageRef, callBack) {
 	if(pageRef.substr(0,1)=="#") {
 		pageRef = pageRef.substr(1);
 	}
+	pageRefOriginal = pageRef;
+	pageRef = pageRef.split("/")[0];
 
 	if (appConfig.PAGECONFIG.NOHEADER != null && appConfig.PAGECONFIG.NOHEADER.length > 0) {
 		if (appConfig.PAGECONFIG.NOHEADER.inArray(pageRef)) {
@@ -90,6 +98,12 @@ function loadPage(pageRef, callBack) {
 	}
   	if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
   	//cleanWorkspace();
+  	if(["login","register","forgotpwd","resetpwd","pwd"].indexOf(pageRef)<0) {
+  		appPageHistory.push(pageRefOriginal);
+  		
+  		pageLast = pageCurrent;
+  		pageCurrent = pageRefOriginal;
+  	}
   
   	$.get("app/pages/" + pageRef + ".html", function(html) {
 		//Internationalization Of HTML Content

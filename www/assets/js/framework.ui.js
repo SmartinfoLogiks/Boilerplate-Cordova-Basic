@@ -15,37 +15,30 @@ function updateTitle(ttl) {
 }
 
 function goBack() {
-	if ($(".modal.in").length > 0) {
-		$(".modal").modal("hide");
-	} else if ($(".overlay").length > 0) {
-		$(".overlay").fadeOut("slow", function() {
-			$(".overlay").detach();
-		});
-	} else if ($(".modal-backdrop").length > 0) {
-		$(".modal-backdrop").detach();
-	} else if ($(".cbp-spmenu.cbp-spmenu-open").length > 0) {
-		$(".cbp-spmenu.cbp-spmenu-open").removeClass("cbp-spmenu-open");
-	} else {
+	foundSomething = false;
+	$.each(appConfig.PAGECONFIG.POPUPCLASSES, function(a, b) {
+		if($(a).length>0) {
+			if(b!=null && b.length>0) {
+	            if(typeof window[b] == "function") window[b]();
+	            else eval(b);
+				foundSomething = true;
+				return false;
+	        }
+		}
+	});
+
+	if(!foundSomething) {
 		appPageHistory.pop();
 		pg = appPageHistory.pop();
 		if (pg == null) {
 			if (navigator.app != null) {
-				if (typeof cordova == "object" && typeof cordova.plugins.backgroundMode == "function") {
-					if (cordova.plugins.backgroundMode.isEnabled()) {
-						cordova.plugins.backgroundMode.moveToBackground();
-					} else {
-						//navigator.app.exitApp();
-						cordova.plugins.backgroundMode.moveToBackground();
-					}
-				} else {
-					navigator.app.exitApp();
-				}
+				navigator.app.exitApp();
 			} else {
 				loadPage(appConfig.PAGEHOME);
 			}
 		} else {
 			loadPage(pg);
-		}
+		}	
 	}
 }
 
