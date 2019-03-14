@@ -2,6 +2,7 @@ var appConfig = {};
 var currentUser = null;
 var appVersionNo=0;
 var appVersionCode=0;
+var appPackageName="";
 var appName="";
 
 var appPageHistory = [];
@@ -17,6 +18,9 @@ if(typeof cordova=="object" && typeof cordova.getAppVersion=="function") {
     }));
     cordova.getAppVersion.getAppName(function(d) {
         appName=d;
+    });
+    cordova.getAppVersion.getPackageName().then(function (package_name) {
+	appPackageName = package_name;
     });
 }
 
