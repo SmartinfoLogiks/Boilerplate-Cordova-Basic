@@ -2,11 +2,11 @@
 
 ./bin/cmd-setup.sh
 
-rm dist/android-release.apk
+rm dist/app-release.apk
 
 cordova build android --release
 
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore dgtags.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk dgtags
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore im-mapp01.keystore platforms/android/build/outputs/apk/release/app-release-unsigned.apk cbt300  
 
-~/android-sdk-linux/build-tools/24.0.2/zipalign -v 4 platforms/android/build/outputs/apk/android-release-unsigned.apk ./dist/android-release.apk
+/opt/android-sdk-linux/build-tools/28.0.3/zipalign -v 4 platforms/android/build/outputs/apk/release/app-release-unsigned.apk ./dist/app-release.apk
 
