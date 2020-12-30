@@ -2,6 +2,11 @@ const _REMOTE = {
 	cacheData: true,
 	pubkey: null,
 	headerCache: null,
+
+	initialize: function() {
+		
+	},
+
 	getDataSource: function() {
 		if (getUserSettings("URI_DATA") == null) {
 			setUserSettings("URI_DATA", appConfig.URL);
@@ -25,7 +30,6 @@ const _REMOTE = {
 		if(_REMOTE.pubkey==null) {
 			_REMOTE.pubkey = getUserSettings("PUBKEY");
 		}
-
 
 		var headers = {};
 		if(_REMOTE.headerCache!=null) {
@@ -67,6 +71,11 @@ const _REMOTE = {
 
 		lx = lx.replace("?&", "?");
 		if(lx.indexOf("?")<0) lx+="?";
+
+		if(appConfig.REFSITE && appConfig.REFSITE.length>0) {
+			lx+="&site="+appConfig.REFSITE;
+		}
+		lx = lx.replace("?&", "?");
 		
 		if (params != null && typeof params == "object") {
 			if (!Array.isArray(params)) {
@@ -303,7 +312,7 @@ const _REMOTE = {
 		});
 	},
 
-
+	//Cache ID
 	getRemoteCache: function(url, q) {
 		if (typeof q == "object") q = JSON.serialize(q);
 		urlHash = md5(url + q);

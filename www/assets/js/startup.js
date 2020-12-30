@@ -54,7 +54,8 @@ requirejs([
 				if (appConfig.CONFIG[appConfig.appstatus] != null) {
 					appConfig.CONFIG = $.extend(appConfig, appConfig.CONFIG[appConfig.appstatus]);
 				}
-
+				_REMOTE.initialize();
+				
 				$("#pageWrapper").load("app/app.html", function() {
 					loadAppCore();
 				});

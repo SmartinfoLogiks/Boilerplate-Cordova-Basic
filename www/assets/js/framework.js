@@ -1,3 +1,5 @@
+var _CURRENT_PAGE = "#home";
+
 function loadAppCore() {
   pageHash = window.location.hash;
   
@@ -60,85 +62,87 @@ function cleanWorkspace() {
 }
 
 function loadPage(pageRef, callBack) {
-	if(pageRef==null || pageRef.length<=0) {
-		pageRef = appConfig.PAGEHOME;
-	}
-	if(pageRef.substr(0,1)=="#") {
-		pageRef = pageRef.substr(1);
-	}
-	pageRefOriginal = pageRef;
-	pageRef = pageRef.split("/")[0];
+    if (pageRef == null || pageRef.length <= 0) {
+        pageRef = appConfig.PAGEHOME;
+    }
+    if (pageRef.substr(0, 1) == "#") {
+        pageRef = pageRef.substr(1);
+    }
+    pageRefOriginal = pageRef;
+    pageRef = pageRef.split("@")[0];
 
-	if (appConfig.PAGECONFIG.NOHEADER != null && appConfig.PAGECONFIG.NOHEADER.length > 0) {
-		if (appConfig.PAGECONFIG.NOHEADER.inArray(pageRef)) {
-			$("#topbar").hide();
-		} else {
-			$("#topbar").show();
-		}
-	}
+    if (appConfig.PAGECONFIG.NOHEADER != null && appConfig.PAGECONFIG.NOHEADER.length > 0) {
+        if (appConfig.PAGECONFIG.NOHEADER.inArray(pageRef)) {
+            $("#topbar").hide();
+        } else {
+            $("#topbar").show();
+        }
+    }
 
-	//No Footer Required
-	if (appConfig.PAGECONFIG.NOFOOTER != null && appConfig.PAGECONFIG.NOFOOTER.length > 0) {
-		if (appConfig.PAGECONFIG.NOFOOTER.inArray(pageRef)) {
-			$("#footer").hide();
-		} else {
-			$("#footer").show();
-		}
-	}
+    //No Footer Required
+    if (appConfig.PAGECONFIG.NOFOOTER != null && appConfig.PAGECONFIG.NOFOOTER.length > 0) {
+        if (appConfig.PAGECONFIG.NOFOOTER.inArray(pageRef)) {
+            $("#footer").hide();
+        } else {
+            $("#footer").show();
+        }
+    }
 
-	//Login Required
-	if (appConfig.PAGECONFIG.NOLOGIN != null && appConfig.PAGECONFIG.NOLOGIN.length > 0) {
-		if (!appConfig.PAGECONFIG.NOLOGIN.inArray(pageRef)) {
-			if (!_AUTH.isLoggedIn()) {
-				loadPage("#login");
-				lgksToast("Login Required");
-				return;
-			}
-		}
-	}
-  	if(typeof window['trackView']=="function") trackView("pageview", pageRef.toUpperCase());
-  	//cleanWorkspace();
-  	if(["login","register","forgotpwd","resetpwd","pwd"].indexOf(pageRef)<0) {
-  		appPageHistory.push(pageRefOriginal);
-  		
-  		pageLast = pageCurrent;
-  		pageCurrent = pageRefOriginal;
-  	}
-  
-  	$.get("app/pages/" + pageRef + ".html", function(html) {
-		//Internationalization Of HTML Content
-		html = html.replace(/#[a-zA-Z0-9-_,.]+#/gi, htmlContentReplacer);
-		
-		updateTitle(pageRef.toTitle());
-		
-		$("body").attr("class",pageRef+"-body app");
-		$("#mainContainer").attr("class",pageRef+"-view container-fluid").html(html);
+    //Login Required
+    if (appConfig.PAGECONFIG.NOLOGIN != null && appConfig.PAGECONFIG.NOLOGIN.length > 0) {
+        if (!appConfig.PAGECONFIG.NOLOGIN.inArray(pageRef)) {
+            if (!_AUTH.isLoggedIn()) {
+                loadPage("#login");
+                lgksToast("Login Required");
+                return;
+            }
+        }
+    }
+    if (typeof window['trackView'] == "function") trackView("pageview", pageRef.toUpperCase());
+    //cleanWorkspace();
+    if (["login", "register", "forgotpwd", "resetpwd", "pwd"].indexOf(pageRef) < 0) {
+        appPageHistory.push(pageRefOriginal);
 
-    	registerPageEvents();
-		//_TRIGGERS.runTriggers('onPagePostload',pageRef);
-	}).done(function() {
-		initAjaxListUI();
-    	pageLoaded(pageRef, "success");
-		_TRIGGERS.runTriggers('onPageLoad', pageRef);
-	}).fail(function() {
-    	pageLoaded(pageRef, "error");
-		_TRIGGERS.runTriggers('onPageError', pageRef);
-	}).always(function() {
-		pageTitle = pageRef.replace("#", "").replace("_", " ").capitalize();
-		//Update Menu Title
-		$(".TOPBAR-TITLE").html(pageTitle);
-		//Initiate Page Elements
-		//Load components
-		//Initiate Events
-    
-    		if (callBack != null) {
-			if (typeof callBack == "function") {
-				callBack(pageRef);
-			} else if (window[callBack] != null && typeof window[callBack] == "function") {
-				window[callBack](pageRef);
-			}
-		}
-	});
+        pageLast = pageCurrent;
+        pageCurrent = pageRefOriginal;
+    }
+
+    $.get("app/pages/" + pageRef + ".html", function(html) {
+        _CURRENT_PAGE = pageRefOriginal;
+
+        //Internationalization Of HTML Content
+        html = html.replace(/#[a-zA-Z0-9-_,.]+#/gi, htmlContentReplacer);
+
+        updateTitle(pageRef.toTitle());
+
+        $("body").attr("class", pageRef + "-body app");
+        $("#mainContainer").attr("class", pageRef + "-view container-fluid").html(html);
+
+        registerPageEvents();
+        //_TRIGGERS.runTriggers('onPagePostload',pageRef);
+    }).done(function() {
+        initAjaxListUI();
+        pageLoaded(pageRef, "success");
+        _TRIGGERS.runTriggers('onPageLoad', pageRef);
+    }).fail(function() {
+        pageLoaded(pageRef, "error");
+        _TRIGGERS.runTriggers('onPageError', pageRef);
+    }).always(function() {
+        pageTitle = pageRef.replace("#", "").replace("_", " ").capitalize();
+        //Update Menu Title
+        $(".TOPBAR-TITLE").html(pageTitle);
+        //Initiate Page Elements
+        //Load components
+        //Initiate Events
+
+        if (callBack != null) {
+            if (typeof callBack == "function") {
+                callBack(pageRef);
+            } else if (window[callBack] != null && typeof window[callBack] == "function") {
+                window[callBack](pageRef);
+            }
+        }
+    });
 }
 
 function loadComponent(compName, callBack) {
