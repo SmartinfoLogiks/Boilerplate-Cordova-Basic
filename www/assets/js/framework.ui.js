@@ -155,12 +155,15 @@ function lgksPrompt(message, defaultData, callBack, title) {
 }
 
 function lgksConfirm(message, callBack, title) {
-	if (title == null) title = appConfig.APPNAME;
-	if (navigator.notification) {
-		navigator.notification.confirm(message, callBack, title);
-	} else {
-		callBack(confirm(message));
-	}
+    if (title == null) title = appConfig.APPNAME;
+    if (navigator.notification) {
+        navigator.notification.confirm(message, function(ans) {
+            if(ans==1) callBack(true);
+            else callBack(false);
+        }, title);
+    } else {
+        callBack(confirm(message));
+    }
 }
 
 function lgksError(message, type, callBack) {
