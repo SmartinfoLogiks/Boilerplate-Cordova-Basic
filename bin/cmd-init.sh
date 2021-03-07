@@ -11,6 +11,10 @@ mkdir dist
 #cp www/config.xml ./
 cd www/
 npm install
+npm audit fix --force
+
 cd ..
 
 cordova platform add android
+
+npm audit fix --force
