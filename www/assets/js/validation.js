@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 require(["npmjs/validatorjs/dist/validator"], function(obj) {
   window.Validator = obj;
 });
-
-=======
->>>>>>> bd6cca3681af460ab98c52e67a873436b1961aa5
 function validateRule(formData, ruleObj) {
     let validation = new Validator(formData, ruleObj);
 
@@ -31,8 +27,4 @@ function validate(formData, ruleKey) {
 
     validation.passes(); // true
     validation.fails(); // false
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bd6cca3681af460ab98c52e67a873436b1961aa5

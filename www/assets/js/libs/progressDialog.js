@@ -17,7 +17,9 @@ function showProgressLoader(params) {
                 cancelable : false,
                 message : 'Sharing your photos'
             },params);
+    if(typeof cordova == "object" && cordova.plugin.pDialog!=null) {
 	cordova.plugin.pDialog.init(params);
+    }
 }
 
 function showProgressLoaderInfinite(params) {
@@ -28,9 +30,19 @@ function showProgressLoaderInfinite(params) {
                 cancelable : false,
                 message : 'Your photos are loading ...'
             },params);
+    if(typeof cordova == "object" && cordova.plugin.pDialog!=null) {
 	cordova.plugin.pDialog.init(params);
+    }
+}
+
+function setProgressLoaderMessage(msg) {
+    if(typeof cordova == "object" && cordova.plugin.pDialog!=null) {
+        cordova.plugin.pDialog.setMessage(msg);
+    }
 }
 
 function hideProgressLoader() {
+    if(typeof cordova == "object" && cordova.plugin.pDialog!=null) {
 	cordova.plugin.pDialog.dismiss();
+    }
 }

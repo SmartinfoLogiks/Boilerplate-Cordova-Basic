@@ -1,4 +1,7 @@
 const _AUTH={
+  initialize: function() {
+    console.log("SECURITY INITIALIZE");
+  },
   isLoggedIn : function() {
 	if (getUserSettings("USERKEY-TOKEN") == null) {
 			return false;
@@ -7,7 +10,7 @@ const _AUTH={
 	}
   },
     
-  validate: function(userID) {
+  checkLogin: function(userID) {
     
   },
   doLogin: function(userid, password, callBack) {
@@ -21,10 +24,11 @@ const _AUTH={
       // console.log(data);
       if (data.token != null) {
         setUserSettings("USERKEY-TOKEN", data.token);
-        setUserSettings("USERKEY-USER", data.userid);
+        setUserSettings("USERKEY-USERID", data.userid);
         setUserSettings("USERKEY-NAME", data.name);
         setUserSettings("USERKEY-EMAIL", data.email);
         setUserSettings("USERKEY-USER", data);
+	setUserSettings("LAST_LOGIN_DATE", moment().format("Y-MM-DD HH:mm:ss"));
         
         if(callBack!=null && typeof callBack == "function") callBack(data);
         else loadPage("#home");
@@ -35,6 +39,9 @@ const _AUTH={
     });
   },
   generateToken: function() {
+    //USERKEY-TOKEN
+  },
+  resetAuthToken: function() {
     //USERKEY-TOKEN
   },
   doLogout: function(gotoPage) {
@@ -67,8 +74,11 @@ const _AUTH={
     return getUserSettings("USERKEY-TOKEN");
   },
   getUserID: function() {
-    userID = getUserSettings("USERKEY-USER");
+    userID = getUserSettings("USERKEY-USERID");
     if (userID == null) return "";
     else return userID;
+  },
+  getMyProfile: function(callBack) {
+    callBack(false);
   }
 }

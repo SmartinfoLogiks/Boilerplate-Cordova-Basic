@@ -7,6 +7,17 @@ function loadAppCore() {
 
   logiksWorkers.initialize();
   
+  $("#templates").load("app/comps/templates.html", function() {
+        if(typeof appLoadComplete == "function") {
+            appLoadComplete(pageHash);
+        } else {
+            loadPage(pageHash);
+
+            if (typeof loadMenus == "function") loadMenus();
+            if (typeof loadUserinfoBar == "function") loadUserinfoBar();
+        }
+    });
+
   loadPage(pageHash);
   
   //loadMenus();
@@ -16,11 +27,20 @@ function loadAppCore() {
 }
 function reloadAppCore(pageRef) {
   cleanWorkspace();
-  loadPage(pageRef);
+  //loadPage(pageRef);
   //loadMenus();
   //loadUserinfoBar();
   
-  reinitApp();
+  //reinitApp();
+  
+  $("#templates").load("app/comps/templates.html", function() {
+        loadPage(pageHash);
+
+        if (typeof loadMenus == "function") loadMenus();
+        if (typeof loadUserinfoBar == "function") loadUserinfoBar();
+
+        if (typeof window['reinitApp'] == "function") reinitApp();
+    });
 }
 
 function registerEventListeners() {
@@ -100,7 +120,7 @@ function loadPage(pageRef, callBack) {
     }
     if (typeof window['trackView'] == "function") trackView("pageview", pageRef.toUpperCase());
     //cleanWorkspace();
-    if (["login", "register", "forgotpwd", "resetpwd", "pwd"].indexOf(pageRef) < 0) {
+    if (["login", "register", "forgotpwd","forgot-password", "resetpwd","reset-password", "pwd"].indexOf(pageRef) < 0) {
         appPageHistory.push(pageRefOriginal);
 
         pageLast = pageCurrent;
@@ -115,7 +135,7 @@ function loadPage(pageRef, callBack) {
 
         updateTitle(pageRef.toTitle());
 
-        $("body").attr("class", pageRef + "-body app");
+        $("body").attr("class", pageRef.replace(/[^\w\s]/gi, '_') + "-body app");
         $("#mainContainer").attr("class", pageRef + "-view container-fluid").html(html);
 
         registerPageEvents();

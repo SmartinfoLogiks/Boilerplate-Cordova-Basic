@@ -1,8 +1,9 @@
 var appPageHistory = [];
 
+var DISABLE_GOBACK = false;
 function pageLoader(msg,size) {
 	if (msg == null) msg = "";
-	if (size == null) size = "4x";
+    	if (size == null) size = "3x";
 
 	$("#mainContainer").html("<div class='appLoaderContainerPage'><br>" + msg + "<br><div class='ajaxloading'></div></div>");
 }
@@ -11,10 +12,15 @@ function updateTitle(ttl) {
 	if(ttl==null || ttl.toUpperCase()=="DASHBOARD") {
 		ttl=appConfig.APPTITLE;
 	}
-	$(".header .navbar-header .navbar-brand").html(ttl);
+	if ($(".header .navbar-header .navbar-brand").length > 0) {
+        $(".header .navbar-header .navbar-brand").html(ttl);
+	} else if ($(".headerTitle").length) {
+        $(".headerTitle").html(ttl);
+	}
 }
 
 function goBack() {
+    if(DISABLE_GOBACK) return false;
 	foundSomething = false;
 	$.each(appConfig.PAGECONFIG.POPUPCLASSES, function(a, b) {
 		if($(a).length>0) {
@@ -179,4 +185,31 @@ function lgksError(message, type, callBack) {
 	// } else {
 	// 	alert("Error:"+message);
 	// }
+}
+
+function generateMenubar() {
+    $("#menuBar").html("");
+    $.each(appConfig.MENU, function(alink, menu) {
+        if (menu.hidden) return;
+        if (menu.method) {
+            if (typeof window[menu.method] == "function") {
+                menuSet = window[menu.method](menu);
+                if (menuSet != null) {
+                    if (Array.isArray(menuSet)) {
+                        $.each(menuSet, function(a, menuHTML) {
+                            $("#menuBar").append(menuHTML);
+                        });
+                    } else if (typeof menuSet == "string") {
+                        $("#menuBar").append(menuSet);
+                    }
+                }
+            }
+        } else {
+            if (alink.charAt(0) == "@") {
+                $("#menuBar").append("<li class='menuLink'><a cmd='" + alink.substr(1) + "' class='actionCmd'>" + menu.icon + menu.title + "</a></li>");
+            } else {
+                $("#menuBar").append("<li class='menuLink'><a href='" + alink + "' class='pageLink'>" + menu.icon + menu.title + "</a></li>");
+            }
+        }
+    });
 }

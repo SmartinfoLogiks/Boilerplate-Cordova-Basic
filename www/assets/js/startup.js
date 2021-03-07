@@ -34,8 +34,10 @@ requirejs([
 
 		"commons",
 		"framework.commons",
+		"framework.storage",
 		"framework.security",
 		"framework.ui",
+		"framework.ling",
 		"framework.remote",
 		"framework.triggers",
 		"framework.workers",
@@ -56,8 +58,10 @@ requirejs([
 				}
 				_REMOTE.initialize();
 				
+				_LING.initialize(function() {
 				$("#pageWrapper").load("app/app.html", function() {
 					loadAppCore();
+					});
 				});
 			});
 		});

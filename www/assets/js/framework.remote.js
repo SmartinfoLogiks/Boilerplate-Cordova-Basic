@@ -44,10 +44,13 @@ const _REMOTE = {
 		    if(_REMOTE.pubkey!=null && _REMOTE.pubkey.length>0) {
 		      headers.pubkey = _REMOTE.pubkey;
 		    }
+			if (appConfig.REFSITE != null && appConfig.REFSITE.length > 0) {
+				// headers.refsite = appConfig.REFSITE;
+			}
 		    _REMOTE.headerCache = headers;
 		}
 
-	    token = getUserToken();
+	    token = _AUTH.getUserToken();
 	    if(token!=null && token.length>0) {
     		headers.token = token;
 	    }

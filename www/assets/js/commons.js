@@ -223,6 +223,15 @@ function callFuncName(funcName, params) {
     return null;
 }
 
+function localStorageSize() {
+    var allStrings = '';
+    for (var key in window.localStorage) {
+        if (window.localStorage.hasOwnProperty(key)) {
+            allStrings += window.localStorage[key];
+        }
+    }
+    return allStrings ? Math.ceil(3 + ((allStrings.length * 16) / (8 * 1024))) + ' KB' : 'Empty (0 KB)';
+}
 function getMarketLink() {
     if (window['device'] != null) {
         switch (device.platform.toLowerCase()) {
@@ -246,6 +255,16 @@ function getMarketLink() {
         }
     }
     return "";
+}
+function flattenTree(data) {
+    fData = {};
+    $.each(data, function(a1, bObj) {
+        $.each(bObj, function(a2, row) {
+            fData[a2] = row;
+        });
+    });
+
+    return fData;
 }
 function getUserToken() {
 	authToken = localStorage.getItem("AUTH_TOKEN");
