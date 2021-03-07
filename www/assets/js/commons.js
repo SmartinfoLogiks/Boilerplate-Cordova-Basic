@@ -1,5 +1,5 @@
 var appLang = "en-GB";
-var lingData = {};
+// var lingData = {};
 
 //JQUERY Additional Functions
 $.fn.serializeObject = function() {
@@ -132,22 +132,22 @@ function isArray(what) {
     return Object.prototype.toString.call(what) === '[object Array]';
 }
 
-function _ling(str) {
-    if (str == null) return "";
-    //if(appConfig.DEBUG) console.warn(str+"=>"+lingData[str]);//+" "+lingData[appLang][str]
-    if (lingData[str] != null) {
-        if ((typeof lingData[str]) == "string") {
-            return lingData[str];
-        } else if (lingData[str][appLang] != null) {
-            return lingData[str][appLang];
-        }
-    } else if (lingData[appLang] != null) {
-        if (lingData[appLang][str] != null) {
-            return lingData[appLang][str];
-        }
-    }
-    return str.replace(/_/g, " ");
-}
+// function _ling(str) {
+//     if (str == null) return "";
+//     //if(appConfig.DEBUG) console.warn(str+"=>"+lingData[str]);//+" "+lingData[appLang][str]
+//     if (lingData[str] != null) {
+//         if ((typeof lingData[str]) == "string") {
+//             return lingData[str];
+//         } else if (lingData[str][appLang] != null) {
+//             return lingData[str][appLang];
+//         }
+//     } else if (lingData[appLang] != null) {
+//         if (lingData[appLang][str] != null) {
+//             return lingData[appLang][str];
+//         }
+//     }
+//     return str.replace(/_/g, " ");
+// }
 
 function htmlContentReplacer(match, p1, p2, p3, offset, string) {
     //if(appConfig.DEBUG) console.warn(match);

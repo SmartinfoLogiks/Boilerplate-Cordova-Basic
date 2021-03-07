@@ -44,14 +44,24 @@ function reloadAppCore(pageRef) {
 }
 
 function registerEventListeners() {
-  $("body").delegate("a.pageLink[href]", "click", function(e) {
+  $("body").delegate("a.pageLink[href],a.btn-link[href],.gotoLink[href]", "click", function(e) {
       href = $(this).attr("href");
       if (href != null && href.length > 1 && href.substr(0, 1) == "#") {
-        	//href = href.substr(1);
-		//href1 = href.split("/");
-		loadPage(href);
+        //href = href.substr(1);
+		    //href1 = href.split("/");
+		    loadPage(href);
       }
     });
+
+  $("body").delegate("a.inappLink[href],a.inapp-link[href],.inappLink[href]","click",function(e) {
+            href=$(this).attr("href");
+            if($(this).hasClass("browser") || $(this).hasClass("inbrowser")) {
+              cordova.InAppBrowser.open(href, '_blank', 'location=no');  
+            } else {
+              navigator.app.loadUrl(href, { openExternal:true });
+              //cordova.InAppBrowser.open(href, '_system', 'location=yes');
+            }
+        });
 	
   $("body").delegate(".actionCmd[cmd],.actionCMD[cmd],.actionIcon[cmd]", "click", function(e) {
 		e.preventDefault();
