@@ -181,8 +181,6 @@ function loadTemplate(compName, callBack) {
         $("#templates").find("#"+compName).detach();
         $("#templates").append("<div id='" + compName + "'>" + html + "</div>");
 
-        _TRIGGERS.runTriggers('onComponentLoad', compName);
-
         if(typeof callBack == "function") {
             callBack(compName);
         } else if (callBack != null && window[callBack] != null) {
