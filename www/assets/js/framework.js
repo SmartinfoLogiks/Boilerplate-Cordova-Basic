@@ -175,17 +175,35 @@ function loadPage(pageRef, callBack) {
     });
 }
 
-function loadComponent(compName, callBack) {
-  //$.getScript("./app/comps/topbar/index.js", function() {});
-  $.get("app/comps/" + compName + "/index.html", function(html) {
-    $("#templates").append("<div id='"+compName+"'>"+html+"</div>");
-    
-    _TRIGGERS.runTriggers('onComponentLoad', compName);
-    
-    if(callBack!=null && window[callBack]!=null) {
-      window[callBack](compName);
-    }
-  });
+function loadTemplate(compName, callBack) {
+    //$.getScript("./app/comps/topbar/index.js", function() {});
+    $.get("app/templates/" + compName + "/index.html", function(html) {
+        $("#templates").find("#"+compName).detach();
+        $("#templates").append("<div id='" + compName + "'>" + html + "</div>");
+
+        _TRIGGERS.runTriggers('onComponentLoad', compName);
+
+        if(typeof callBack == "function") {
+            callBack(compName);
+        } else if (callBack != null && window[callBack] != null) {
+            window[callBack](compName);
+        }
+    });
+}
+
+function loadComponent(compName, devID, callBack) {
+    //$.getScript("./app/comps/topbar/index.js", function() {});
+    $.get("app/comps/" + compName + "/index.html", function(html) {
+        $(devID).html(html);
+
+        _TRIGGERS.runTriggers('onComponentLoad', compName);
+
+        if(typeof callBack == "function") {
+            callBack(compName);
+        } else if (callBack != null && window[callBack] != null) {
+            window[callBack](compName);
+        }
+    });
 }
 
 
