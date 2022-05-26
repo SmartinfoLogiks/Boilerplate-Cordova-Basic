@@ -1,3 +1,9 @@
+//Primary Application Javascript, Write code here that can be accessed across app
+
+requirejs([
+  "appjs/hbars",
+]);
+
 $(function() {
    console.log("App Load Time: ", ((Date.now()-appTimerStart)+1800)/1000,' Secs');
 });

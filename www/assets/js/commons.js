@@ -1,5 +1,4 @@
 var appLang = "en-GB";
-// var lingData = {};
 
 //JQUERY Additional Functions
 $.fn.serializeObject = function() {

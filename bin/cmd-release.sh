@@ -6,7 +6,8 @@ rm dist/app-release.apk
 
 cordova build android --release
 
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore im-mapp01.keystore platforms/android/build/outputs/apk/release/app-release-unsigned.apk cbt300  
+#jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore app.keystore platforms/android/build/outputs/apk/release/app-release-unsigned.apk app_alias  
 
-/opt/android-sdk-linux/build-tools/28.0.3/zipalign -v 4 platforms/android/build/outputs/apk/release/app-release-unsigned.apk ./dist/app-release.apk
+#zipalign -v 4 platforms/android/build/outputs/apk/release/app-release-unsigned.apk ./dist/app-release.apk
 
+cp platforms/android/build/outputs/apk/release/android-release.apk ./dist/app-release.apk

@@ -1,0 +1,15 @@
+{
+    "android": {
+        "debug": {
+            "packageType": "apk"
+        },
+        "release": {
+            "keystore": "app.keystore",
+            "storePassword": "",
+            "alias": "",
+            "password" : "",
+            "keystoreType": "",
+            "packageType": "apk"
+        }
+    }
+}
