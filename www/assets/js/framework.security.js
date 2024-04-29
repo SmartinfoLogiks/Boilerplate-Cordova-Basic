@@ -64,7 +64,7 @@ const _AUTH={
     $.getJSON("app.json",function(data) {
             appConfig=data;
             if(appConfig.CONFIG[appConfig.appstatus]!=null) {
-              appConfig.CONFIG = $.extend(appConfig,appConfig.CONFIG[appConfig.appstatus]);
+              appConfig = $.extend(appConfig,appConfig.CONFIG[appConfig.appstatus]);
             }
 
             reloadAppCore(gotoPage);
